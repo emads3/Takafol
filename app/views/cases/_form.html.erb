@@ -1,0 +1,34 @@
+<%= form_with(model: @case, local: true) do |form| %>
+  <% if @case.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@case.errors.count, "error") %> prohibited this case from being saved:</h2>
+
+      <ul>
+        <% @case.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <%= label_tag :name %>
+  <%= form.text_area :name %>
+
+ <%= label_tag :job %>
+  <%= form.text_area :job %>
+
+   <%= label_tag :description %>
+  <%= form.text_area :description %>
+
+   <%= label_tag :priority %>
+  <%= form.text_area :priority %>
+
+   <%= label_tag :national_id %>
+  <%= form.text_area :national_id %>
+
+  <div class="actions">
+
+
+    <%= form.submit %>
+  </div>
+<% end %>
