@@ -1,5 +1,5 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: [:show, :edit, :update, :destroy]
+  before_action :set_case, only: [:show, :edit, :update, :destroy ]
 
   # GET /cases
   # GET /cases.json
@@ -10,6 +10,7 @@ class CasesController < ApplicationController
   # GET /cases/1
   # GET /cases/1.json
   def show
+    @case= Case.find(params["id"])
   end
 
   # GET /cases/new
@@ -24,17 +25,35 @@ class CasesController < ApplicationController
   # POST /cases
   # POST /cases.json
   def create
-    @case = Case.new(case_params)
 
-    respond_to do |format|
-      if @case.save
-        format.html { redirect_to @case, notice: 'Case was successfully created.' }
-        format.json { render :show, status: :created, location: @case }
-      else
-        format.html { render :new }
-        format.json { render json: @case.errors, status: :unprocessable_entity }
-      end
-    end
+    if current_charity 
+        @case = @current_charity.cases.create(case_params)
+
+        respond_to do |format|
+          if @case.save
+            format.html { redirect_to @case, notice: 'Case was successfully created.' }
+            format.json { render :show, status: :created, location: @case }
+          else
+            format.html { render :new }
+            format.json { render json: @case.errors, status: :unprocessable_entity }
+          end
+        end
+
+      else 
+
+        @case = Case.new(case_params)
+
+        respond_to do |format|
+          if @case.save
+            format.html { redirect_to @case, notice: 'Case was successfully created.' }
+            format.json { render :show, status: :created, location: @case }
+          else
+            format.html { render :new }
+            format.json { render json: @case.errors, status: :unprocessable_entity }
+          end
+        end
+   end
+
   end
 
   # PATCH/PUT /cases/1
@@ -69,6 +88,6 @@ class CasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def case_params
-      params.fetch(:case, {})
+      params.fetch(:case).permit(:name , :job , :priority , :national_id)
     end
 end

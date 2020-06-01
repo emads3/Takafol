@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_121616) do
-
-  create_table "case_doners", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "state"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2020_05_31_195638) do
 
   create_table "cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
@@ -33,31 +27,59 @@ ActiveRecord::Schema.define(version: 2020_05_28_121616) do
   end
 
   create_table "charities", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
     t.text "address"
     t.string "phone_number"
     t.text "description"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_charities_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_charities_on_reset_password_token", unique: true
   end
 
-  create_table "charity_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "charities_cases", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "charity_id", null: false
+    t.bigint "case_id", null: false
+    t.index ["case_id"], name: "index_charities_cases_on_case_id"
+    t.index ["charity_id"], name: "index_charities_cases_on_charity_id"
   end
 
-  create_table "doners", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "donors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
     t.integer "national_id", null: false
     t.string "national_id_img"
     t.text "address"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_donors_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_donors_on_reset_password_token", unique: true
   end
 
+  create_table "donors_cases", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "donor_id", null: false
+    t.bigint "case_id", null: false
+    t.index ["case_id"], name: "index_donors_cases_on_case_id"
+    t.index ["donor_id"], name: "index_donors_cases_on_donor_id"
+  end
+
+  add_foreign_key "charities_cases", "cases"
+  add_foreign_key "charities_cases", "charities"
+  add_foreign_key "donors_cases", "cases"
+  add_foreign_key "donors_cases", "donors"
 end
