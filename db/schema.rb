@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_05_31_195638) do
     t.index ["reset_password_token"], name: "index_charities_on_reset_password_token", unique: true
   end
 
-  create_table "charities_cases", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "charities_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
