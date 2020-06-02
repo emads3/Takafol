@@ -3,6 +3,9 @@
 <%= @case.name
 %>
 
+<% if !current_donor.donors_cases[0].case_id == @case["id"] %>
+ <%= link_to 'Request Case Provision', provide(:case_id => @case.id), {method: :post, style: 'cursor:pointer'} %>
+ <% end %>
 
 <%= link_to 'Edit', edit_case_path(@case) %> |
 <%= link_to 'Back', cases_path %>

@@ -13,6 +13,12 @@ class CasesController < ApplicationController
     @case= Case.find(params["id"])
   end
 
+  def provide
+    @case = Case.find(params["case_id"])
+    @case.donors << current_donor
+    # redirect_to request.referrer
+  end
+
   # GET /cases/new
   def new
     @case = Case.new
