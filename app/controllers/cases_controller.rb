@@ -27,8 +27,9 @@ class CasesController < ApplicationController
   def create
 
     if current_charity 
-        @case = @current_charity.cases.create(case_params)
 
+        @case = @current_charity.cases.create(case_params)
+        @case.charities_cases.first.update(state: "protected")
         respond_to do |format|
           if @case.save
             format.html { redirect_to @case, notice: 'Case was successfully created.' }
