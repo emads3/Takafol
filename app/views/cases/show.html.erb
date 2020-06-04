@@ -1,7 +1,46 @@
 <p id="notice"><%= notice %></p>
+<%= params.inspect %>
 
 <%= @case.name
 %>
+<%if donor_signed_in?%>
+    <% if !current_donor.donors_cases.where(:case_id => @case.id).any? ||
+      current_donor.donors_cases.where(:case_id => @case.id).last.state == "cancelled"  %>
+
+        <%= link_to 'Request Case Provision', provide(:case_id => @case.id), {method: :post, style: 'cursor:pointer'} %>
+    <% else %>
+        <p> Case Requested  </p>
+        <%= link_to 'Remove Case Provision', @case , method: :post,:case_id => @case.id ,style: 'cursor:pointer' %>
+
+    <% end %>
+<% end %>
+
+<%if charity_signed_in?%>
+    <% if current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
+        
+        <div> Donor Requested_id : </div>
+        <%= current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
+
+            <div> Donor Request State : </div>
+          <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %>
+
+
+        
+        <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
+
+           <%= f.fields_for :donors_cases do |d| %>
+
+            <%= d.select :state, ["approved","rejected"]%>
+            <%= d.submit "Submit" %>
+            <% end %>
+
+
+        <% end %>
+
+
+    <% end %>
+
+<% end %>
 
 
 <%= link_to 'Edit', edit_case_path(@case) %> |
