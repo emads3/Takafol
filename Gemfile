@@ -20,7 +20,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
-
+gem 'stripe-rails'
+gem 'paypal-sdk-rest'
 # used in faking data for seeds
 # https://github.com/faker-ruby/faker
 gem 'faker'

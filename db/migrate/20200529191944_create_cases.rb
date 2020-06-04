@@ -10,6 +10,7 @@ class CreateCases < ActiveRecord::Migration[6.0]
       t.text :address
       t.string :phone
       t.integer :national_id, null: false
+      t.decimal :amount_needed
       t.timestamps
     end
   end

@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_05_31_195638) do
     t.text "address"
     t.string "phone"
     t.integer "national_id", null: false
+    t.decimal "amount_needed", precision: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
