@@ -1,5 +1,7 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: [:show, :edit, :update, :destroy ]
+  before_action :set_case, only: [:show, :edit, :update, :destroy  ]
+  skip_before_action :verify_authenticity_token
+
 
   # GET /cases
   # GET /cases.json
@@ -15,8 +17,32 @@ class CasesController < ApplicationController
 
   def provide
     @case = Case.find(params["case_id"])
-    @case.donors << current_donor
-    # redirect_to request.referrer
+
+     if @case.donors_cases.where('state in (?)' , ["pending","cancelled","rejected"]).count < 1
+      @case.donors << current_donor
+      @case.donors_cases.update(state: "pending" )
+     end
+
+    redirect_to cases_path
+  end
+
+  def remove
+    id = current_donor.id
+    @case = Case.find(params["case_id"])
+    @case = @case.donors_cases.where(donor_id = "#{id}").update(state: "cancelled")
+    redirect_to cases_path
+
+  end
+
+
+  def updatestate
+    Rails.logger.debug params.inspect
+    @id = params["id"].to_i
+    @case =Case.find(@id)
+    @case.donors_cases.last.update(state: params["case"]["donors_cases"]["state"])
+    # redirect_to hi
+    # render plain("hiiii")
+
   end
 
   # GET /cases/new
