@@ -20,6 +20,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
+gem 'stripe'
+
 
 # used in faking data for seeds
 # https://github.com/faker-ruby/faker

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
+  
   put 'cases/updatestate/:id', to: 'cases#updatestate'
+
+  scope '/checkout' do
+    post 'create' , to: 'checkout#create' , as: 'checkout_create'
+    get 'cancel' , to: 'checkout#cancel' , as: 'checkout_cancel'
+    get 'success' , to: 'checkout#success' , as: 'checkout_success'
+
+  end
+
   resources :cases do
     post '' , :to => 'cases#provide'
     post '' , :to => 'cases#remove'

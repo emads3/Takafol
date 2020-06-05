@@ -36,7 +36,6 @@ class CasesController < ApplicationController
 
 
   def updatestate
-    Rails.logger.debug params.inspect
     @id = params["id"].to_i
     @case =Case.find(@id)
     @case.donors_cases.last.update(state: params["case"]["donors_cases"]["state"])

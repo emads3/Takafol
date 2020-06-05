@@ -5,6 +5,8 @@ class Case < ApplicationRecord
     #charity&case relation
     has_many :charities_cases
     has_many :charities, through: :charities_cases
+    accepts_nested_attributes_for :charities
+
 
     # doner&case relation
     has_many :donors_cases
