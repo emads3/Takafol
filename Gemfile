@@ -23,6 +23,8 @@ gem 'devise'
 gem 'stripe'
 
 
+gem 'stripe-rails'
+gem 'paypal-sdk-rest'
 # used in faking data for seeds
 # https://github.com/faker-ruby/faker
 gem 'faker'
