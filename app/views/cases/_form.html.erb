@@ -20,8 +20,15 @@
    <%= label_tag :description %>
   <%= form.text_area :description %>
 
-   <%= label_tag :priority %>
-  <%= form.text_area :priority %>
+  <%if charity_signed_in?%>
+
+      <%= label_tag :priority %>
+      <%= form.text_area :priority %>
+
+      <%= label_tag :amount_needed %>
+      <%= form.text_area :amount_needed %>
+  <% end %>
+
 
    <%= label_tag :national_id %>
   <%= form.text_area :national_id %>

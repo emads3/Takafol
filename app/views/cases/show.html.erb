@@ -16,29 +16,28 @@
 <% end %>
 
 <%if charity_signed_in?%>
-    <% if current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
-        
-        <div> Donor Requested_id : </div>
-        <%= current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
 
-            <div> Donor Request State : </div>
-          <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %>
+    <% if !current_charity.cases.where(id: @case.id).last.donors_cases.empty? %>
+        <% if !current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor.nil? %>
+            
+            <div> Donor Requested_id : </div>
+            <%= current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
+
+                <div> Donor Request State : </div>
+            <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %>
 
 
-        
-        <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
+            
+            <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
 
-           <%= f.fields_for :donors_cases do |d| %>
+            <%= f.fields_for :donors_cases do |d| %>
 
-            <%= d.select :state, ["approved","rejected"]%>
-            <%= d.submit "Submit" %>
+                <%= d.select :state, ["approved","rejected"]%>
+                <%= d.submit "Submit" %>
+                <% end %>
             <% end %>
-
-
         <% end %>
-
-
-    <% end %>
+   <% end %>
 
 <% end %>
 

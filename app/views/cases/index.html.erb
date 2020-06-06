@@ -10,14 +10,20 @@
   </thead>
 
   <tbody>
+   <div> Cases that are protected by charities </div>
 
     <% @cases.each do |c| %>
-      <tr>
-        <td> <%= c.name %></td>
-        <td><%= link_to 'Show', c %></td>
-        <td><%= link_to 'Edit', edit_case_path(c) %></td>
-        <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+     <% if  !c.charities.empty? || !c.donors.empty? %>
+        <% if c.charities_cases.last.state == "protected" %>
+          <tr>
+            <td> <%= c.name %></td>
+            <td><%= link_to 'Show', c %></td>
+            <td><%= link_to 'Edit', edit_case_path(c) %></td>
+            <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>

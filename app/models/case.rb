@@ -1,5 +1,6 @@
 class Case < ApplicationRecord
-    validates :priority, :inclusion => { :in => 1..5 }
+
+    validates :priority, :inclusion => { :in => 1..5 } , allow_nil: true
     validates :national_id, uniqueness: true
 
     #charity&case relation

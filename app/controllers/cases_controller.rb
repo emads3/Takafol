@@ -39,6 +39,7 @@ class CasesController < ApplicationController
     @id = params["id"].to_i
     @case =Case.find(@id)
     @case.donors_cases.last.update(state: params["case"]["donors_cases"]["state"])
+    @case.charities_cases.last.update(state: "released")
     # redirect_to hi
     # render plain("hiiii")
 
@@ -59,7 +60,7 @@ class CasesController < ApplicationController
 
     if current_charity 
 
-        @case = @current_charity.cases.create(case_params)
+        @case = @current_charity.cases.create(case_params_charity)
         @case.charities_cases.first.update(state: "protected")
         respond_to do |format|
           if @case.save
@@ -120,6 +121,10 @@ class CasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def case_params
-      params.fetch(:case).permit(:name , :job , :priority , :national_id)
+      params.fetch(:case).permit(:name , :job , :national_id , :description)
+    end
+
+    def case_params_charity
+      params.fetch(:case).permit(:name , :job , :priority , :national_id , :amount_needed)
     end
 end
