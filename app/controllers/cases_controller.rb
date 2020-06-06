@@ -6,7 +6,11 @@ class CasesController < ApplicationController
   # GET /cases
   # GET /cases.json
   def index
-    @cases = Case.all
+    @cases = Case.all.order(priority: :desc)
+  end
+
+  def freeindex
+    @cases = Case.all.order(priority: :desc)
   end
 
   # GET /cases/1
@@ -15,26 +19,36 @@ class CasesController < ApplicationController
     @case= Case.find(params["id"])
   end
 
-  def provide
-    @case = Case.find(params["case_id"])
+  # Add Case to Donor
+  def protect
+    @case = Case.find(params["id"])
 
      if @case.donors_cases.where('state in (?)' , ["pending","cancelled","rejected"]).count < 1
       @case.donors << current_donor
-      @case.donors_cases.update(state: "pending" )
-     end
+    end
+    @case.donors_cases.update(state: "pending" )
 
     redirect_to cases_path
   end
 
+  def freeprotect
+    @case = Case.find(params["id"])
+    @case.charities << current_charity
+    @case.charities_cases.update(state: "protected" )
+    redirect_to cases_path
+  end
+
+
+  #Remove Donor's Protection
   def remove
     id = current_donor.id
-    @case = Case.find(params["case_id"])
+    @case = Case.find(params["id"])
     @case = @case.donors_cases.where(donor_id = "#{id}").update(state: "cancelled")
     redirect_to cases_path
 
   end
 
-
+  #Charity's Approval to Donor's Request
   def updatestate
     @id = params["id"].to_i
     @case =Case.find(@id)
@@ -58,6 +72,7 @@ class CasesController < ApplicationController
   # POST /cases.json
   def create
 
+    #If a Charity is signed in the case will be assigned to it automatically
     if current_charity 
 
         @case = @current_charity.cases.create(case_params_charity)
@@ -75,7 +90,6 @@ class CasesController < ApplicationController
       else 
 
         @case = Case.new(case_params)
-
         respond_to do |format|
           if @case.save
             format.html { redirect_to @case, notice: 'Case was successfully created.' }
@@ -124,6 +138,7 @@ class CasesController < ApplicationController
       params.fetch(:case).permit(:name , :job , :national_id , :description)
     end
 
+    #Charity's Special Params to add Case
     def case_params_charity
       params.fetch(:case).permit(:name , :job , :priority , :national_id , :amount_needed)
     end

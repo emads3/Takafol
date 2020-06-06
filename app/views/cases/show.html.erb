@@ -1,17 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <%= @case.name%>
+<%= @case.id%>
+
 
 <%= button_to 'Donate to case' , checkout_create_path , method: :post , params: {id: @case.id} ,remote: true %>
 <%if donor_signed_in?%>
     <% if !current_donor.donors_cases.where(:case_id => @case.id).any? ||
       current_donor.donors_cases.where(:case_id => @case.id).last.state == "cancelled"  %>
-
-        <%= link_to 'Request Case Provision', provide(:case_id => @case.id), {method: :post, style: 'cursor:pointer'} %>
+        
+         <%= button_to 'Request Case Protection', donor_protect_path , method: :post , params: {id: @case.id}  %>
     <% else %>
         <p> Case Requested  </p>
-        <%= link_to 'Remove Case Provision', @case , method: :post,:case_id => @case.id ,style: 'cursor:pointer' %>
-
+        <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @case.id}  %>
     <% end %>
 <% end %>
 

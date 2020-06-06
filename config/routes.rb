@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
-  
-  put 'cases/updatestate/:id', to: 'cases#updatestate'
-
   scope '/checkout' do
     post 'create' , to: 'checkout#create' , as: 'checkout_create'
     get 'cancel' , to: 'checkout#cancel' , as: 'checkout_cancel'
     get 'success' , to: 'checkout#success' , as: 'checkout_success'
-
   end
 
+  get 'freecases' , to: 'cases#freeindex' , as: 'free_cases'
+  post 'freecases/protect' , to: 'cases#freeprotect' , as: 'protect_case'
+  put 'cases/updatestate/:id', to: 'cases#updatestate'
+  post 'cases/cancel' , :to => 'cases#remove' , as:'donor_cancel'
+  post 'cases/protect' , :to => 'cases#protect' , as: 'donor_protect'
+
+
   resources :cases do
-    post '' , :to => 'cases#provide'
-    post '' , :to => 'cases#remove'
-    # put '' , :to => 'cases#updatestate'
   end
   
   devise_for :donors , path: 'donors' ,controllers: {

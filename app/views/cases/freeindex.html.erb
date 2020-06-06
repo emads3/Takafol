@@ -1,0 +1,38 @@
+<%if charity_signed_in? %>
+<p id="notice"><%= notice %></p>
+
+<h1>Cases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+   <div> Cases that are protected by charities </div>
+
+    <% @cases.each do |c| %>
+        <% if c.charities_cases.empty? %>
+            <tr>
+                <td> <%= c.name %></td>
+                <td><%= link_to 'Show', c %></td>
+                        <td><%= link_to 'Edit', edit_case_path(c) %></td>
+                        <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                         <td><%= button_to 'Protect Case', protect_case_path , method: :post , params: {id: c.id}  %></td>
+            </tr>
+        <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Case', new_case_path %>
+
+<% else %>
+
+<div> You're not authorized to view this page </div>
+
+<% end %>

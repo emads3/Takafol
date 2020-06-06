@@ -14,7 +14,19 @@
   </head>
 
   <body>
-     <% if donor_signed_in? %>
+      <% if charity_signed_in? %>
+         <p class="navbar-text float-right">
+          <h2>Charity</h2>
+          <% if charity_signed_in? %>
+            Logged in as <strong><%= current_charity.email %></strong>.
+            <%= link_to 'Edit profile', edit_charity_registration_path, :class => 'navbar-link' %> |
+            <%= link_to "Logout", destroy_charity_session_path, method: :delete, :class => 'navbar-link'  %>
+          <% else %>
+            <%= link_to "Sign up", new_charity_registration_path, :class => 'navbar-link'  %> |
+            <%= link_to "Login", new_charity_session_path, :class => 'navbar-link'  %>
+          <% end %>
+        </p>
+     <% elsif donor_signed_in? %>
            <p class="navbar-text float-right">
           <h2>Donor</h2>
           <% if donor_signed_in? %>
@@ -27,33 +39,9 @@
           <% end %>
           </p>
 
-      <% elsif charity_signed_in? %>
-         <p class="navbar-text float-right">
-          <h2>Charity</h2>
-          <% if charity_signed_in? %>
-            Logged in as <strong><%= current_charity.email %></strong>.
-            <%= link_to 'Edit profile', edit_charity_registration_path, :class => 'navbar-link' %> |
-            <%= link_to "Logout", destroy_charity_session_path, method: :delete, :class => 'navbar-link'  %>
-          <% else %>
-            <%= link_to "Sign up", new_charity_registration_path, :class => 'navbar-link'  %> |
-            <%= link_to "Login", new_charity_session_path, :class => 'navbar-link'  %>
-          <% end %>
-        </p>
 
 
       <% else !donor_signed_in? && !charity_signed_in? %>
-
-          <p class="navbar-text float-right">
-          <h2>Donor</h2>
-          <% if donor_signed_in? %>
-            Logged in as <strong><%= current_donor.email %></strong>.
-            <%= link_to 'Edit profile', edit_donor_registration_path, :class => 'navbar-link' %> |
-            <%= link_to "Logout", destroy_donor_session_path, method: :delete, :class => 'navbar-link'  %>
-          <% else %>
-            <%= link_to "Sign up", new_donor_registration_path, :class => 'navbar-link'  %> |
-            <%= link_to "Login", new_donor_session_path, :class => 'navbar-link'  %>
-          <% end %>
-          </p>
 
         <p class="navbar-text float-right">
           <h2>Charity</h2>
@@ -66,6 +54,20 @@
             <%= link_to "Login", new_charity_session_path, :class => 'navbar-link'  %>
           <% end %>
         </p>
+
+        
+          <p class="navbar-text float-right">
+          <h2>Donor</h2>
+          <% if donor_signed_in? %>
+            Logged in as <strong><%= current_donor.email %></strong>.
+            <%= link_to 'Edit profile', edit_donor_registration_path, :class => 'navbar-link' %> |
+            <%= link_to "Logout", destroy_donor_session_path, method: :delete, :class => 'navbar-link'  %>
+          <% else %>
+            <%= link_to "Sign up", new_donor_registration_path, :class => 'navbar-link'  %> |
+            <%= link_to "Login", new_donor_session_path, :class => 'navbar-link'  %>
+          <% end %>
+          </p>
+
 
     
 

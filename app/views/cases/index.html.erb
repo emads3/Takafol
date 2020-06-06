@@ -19,8 +19,10 @@
           <tr>
             <td> <%= c.name %></td>
             <td><%= link_to 'Show', c %></td>
-            <td><%= link_to 'Edit', edit_case_path(c) %></td>
-            <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <%if charity_signed_in?%>
+                <td><%= link_to 'Edit', edit_case_path(c) %></td>
+                <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           </tr>
         <% end %>
       <% end %>
@@ -31,3 +33,8 @@
 <br>
 
 <%= link_to 'New Case', new_case_path %>
+
+<%if charity_signed_in? %>
+<%= link_to 'Unprotected Cases', free_cases_path %>
+<% end %>
+
