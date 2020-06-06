@@ -9,8 +9,14 @@ class CasesController < ApplicationController
     @cases = Case.all.order(priority: :desc)
   end
 
+  #Free Cases Index
   def freeindex
     @cases = Case.all.order(priority: :desc)
+  end
+
+  #Profile
+  def profile
+    @cases = Case.all
   end
 
   # GET /cases/1

@@ -34,6 +34,11 @@
 
 <%= link_to 'New Case', new_case_path %>
 
+<%if charity_signed_in? || charity_signed_in? %>
+<%= link_to 'Show Profile', profile_path %> |
+<% end %>
+
+
 <%if charity_signed_in? %>
 <%= link_to 'Unprotected Cases', free_cases_path %>
 <% end %>

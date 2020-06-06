@@ -7,9 +7,9 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-<%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
 
-<script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 
   </head>
 
@@ -20,7 +20,8 @@
           <% if charity_signed_in? %>
             Logged in as <strong><%= current_charity.email %></strong>.
             <%= link_to 'Edit profile', edit_charity_registration_path, :class => 'navbar-link' %> |
-            <%= link_to "Logout", destroy_charity_session_path, method: :delete, :class => 'navbar-link'  %>
+            <%= link_to "Logout", destroy_charity_session_path, method: :delete, :class => 'navbar-link'  %> |
+            <%= link_to 'Show Profile', profile_path %> 
           <% else %>
             <%= link_to "Sign up", new_charity_registration_path, :class => 'navbar-link'  %> |
             <%= link_to "Login", new_charity_session_path, :class => 'navbar-link'  %>
@@ -32,7 +33,8 @@
           <% if donor_signed_in? %>
             Logged in as <strong><%= current_donor.email %></strong>.
             <%= link_to 'Edit profile', edit_donor_registration_path, :class => 'navbar-link' %> |
-            <%= link_to "Logout", destroy_donor_session_path, method: :delete, :class => 'navbar-link'  %>
+            <%= link_to "Logout", destroy_donor_session_path, method: :delete, :class => 'navbar-link'  %> |
+            <%= link_to 'Show Profile', profile_path %> 
           <% else %>
             <%= link_to "Sign up", new_donor_registration_path, :class => 'navbar-link'  %> |
             <%= link_to "Login", new_donor_session_path, :class => 'navbar-link'  %>
@@ -67,10 +69,6 @@
             <%= link_to "Login", new_donor_session_path, :class => 'navbar-link'  %>
           <% end %>
           </p>
-
-
-    
-
 
      <% end %>
 

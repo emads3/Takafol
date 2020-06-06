@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   end
 
   get 'freecases' , to: 'cases#freeindex' , as: 'free_cases'
+  get 'profile' , to: 'cases#profile', as: 'profile'
   post 'freecases/protect' , to: 'cases#freeprotect' , as: 'protect_case'
-  put 'cases/updatestate/:id', to: 'cases#updatestate'
   post 'cases/cancel' , :to => 'cases#remove' , as:'donor_cancel'
   post 'cases/protect' , :to => 'cases#protect' , as: 'donor_protect'
+  put 'cases/updatestate/:id', to: 'cases#updatestate'
 
 
   resources :cases do
