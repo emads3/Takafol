@@ -21,9 +21,9 @@
   <%= form.text_area :description %>
 
   <%if charity_signed_in?%>
-
+      
       <%= label_tag :priority %>
-      <%= form.text_area :priority %>
+      <%= form.select :priority, [1,2,3,4,5]%>
 
       <%= label_tag :amount_needed %>
       <%= form.text_area :amount_needed %>

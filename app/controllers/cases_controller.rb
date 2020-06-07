@@ -36,7 +36,7 @@ class CasesController < ApplicationController
 
     redirect_to cases_path
   end
-
+  #Charity protects the case
   def freeprotect
     @case = Case.find(params["id"])
     @case.charities << current_charity
