@@ -4,7 +4,20 @@
 <%= @case.id%>
 
 
-<%= button_to 'Donate to case' , checkout_create_path , method: :post , params: {id: @case.id} ,remote: true %>
+<%
+=begin%>
+ <%= button_to 'Donate to case' , checkout_create_path , method: :post , params: {id: @case.id} ,remote: true %> 
+<%
+=end%>
+
+<% if @case.amount_needed >= @case.amount_obtained%>
+    <%= form_with(url: checkout_create_path, method: "post" , remote: true ) do %>
+    <%= hidden_field_tag(:id, @case.id) %>
+    <%= label_tag(:amount, "Amount") %>
+    <%= text_field_tag(:amount) %>
+    <%= submit_tag("Donate To Case") %>
+    <% end %>
+<% end %>
 
 
 
@@ -22,7 +35,7 @@
 <% end %>
 
 <%if charity_signed_in?%>
-
+<% if !current_charity.cases.empty? %>
     <% if !current_charity.cases.where(id: @case.id).last.donors_cases.empty? %>
         <% if !current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor.nil? %>
             
@@ -44,6 +57,8 @@
             <% end %>
         <% end %>
    <% end %>
+<% end %>
+
 
 <% end %>
 

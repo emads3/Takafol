@@ -86,7 +86,10 @@
      <tr>
     <% current_donor.donors_cases.where(state: "approved").each do |c| %>
         <td> <%= @cases.find(c.case_id).name %></td>
-        <td> <%= link_to 'Dump Case', @cases.find(c.case_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>  <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%></td>
+       
+
+        <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%>
 
     <% end %>
     </tr>

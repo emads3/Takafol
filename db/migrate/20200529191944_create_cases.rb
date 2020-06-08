@@ -11,8 +11,8 @@ class CreateCases < ActiveRecord::Migration[6.0]
       t.text :address
       t.string :phone
       t.integer :national_id, null: false
-      t.decimal :amount_needed
-      t.decimal :amount_obtained
+      t.decimal :amount_needed , :default => 500
+      t.decimal :amount_obtained ,  :default => 0
       t.timestamps
     end
   end

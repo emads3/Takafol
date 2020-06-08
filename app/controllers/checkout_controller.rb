@@ -1,6 +1,7 @@
 class CheckoutController < ApplicationController
     def create
         @case = Case.find(params[:id])
+        @amount = (params[:amount].to_i * 100)
 
         if @case.nil?
             redirect_to root_path
@@ -10,8 +11,8 @@ class CheckoutController < ApplicationController
         @session =Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
             line_items: [{
-                name: @case.name,
-                amount: @case.national_id,
+                name: @case.id,
+                amount: @amount,
                 currency: 'egp',
                 quantity: 1,
             }],
@@ -29,6 +30,15 @@ class CheckoutController < ApplicationController
     def success
         @session = Stripe::Checkout::Session.retrieve(params[:session_id])
         @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+        @id=@session["display_items"][0]["custom"]["name"]
+        @case = Case.find(@id)
+        @amount_received = @payment_intent["amount_received"]
+        if @case.amount_obtained.nil?
+            @total = @amount_received /100
+        else
+            @total = (@case.amount_obtained +  @amount_received)/100
+        end
+        @case.update(amount_obtained: @total )
     end
 
 

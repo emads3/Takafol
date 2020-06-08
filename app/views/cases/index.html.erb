@@ -15,14 +15,18 @@
     <% @cases.each do |c| %>
 
      <% if  !c.charities.empty? || !c.donors.empty? %>
-        <% if c.charities_cases.last.state == "protected" %>
+        <% if c.charities_cases.last.state == "protected" && c.amount_needed >= c.amount_obtained%>
           <tr>
             <td> <%= c.name %></td>
             <td><%= link_to 'Show', c %></td>
-              <%if charity_signed_in?%>
+            <%if charity_signed_in?%>
+              <%if !current_charity.charities_cases.where(case_id: c.id).last.nil? %>
                 <td><%= link_to 'Edit', edit_case_path(c) %></td>
                 <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <% end %>
+           <% end %>
+
+            
           </tr>
         <% end %>
       <% end %>
