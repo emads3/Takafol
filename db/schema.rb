@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_31_195638) do
+ActiveRecord::Schema.define(version: 2020_06_09_082934) do
+
+  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
 
   create_table "cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
@@ -18,11 +44,13 @@ ActiveRecord::Schema.define(version: 2020_05_31_195638) do
     t.text "description"
     t.integer "children_num"
     t.string "marital_status"
+    t.string "email"
     t.integer "priority"
     t.text "address"
     t.string "phone"
     t.integer "national_id", null: false
-    t.decimal "amount_needed", precision: 10
+    t.decimal "amount_needed", precision: 10, default: "500"
+    t.decimal "amount_obtained", precision: 10, default: "0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -69,7 +97,7 @@ ActiveRecord::Schema.define(version: 2020_05_31_195638) do
     t.index ["reset_password_token"], name: "index_donors_on_reset_password_token", unique: true
   end
 
-  create_table "donors_cases", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "donors_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -79,8 +107,8 @@ ActiveRecord::Schema.define(version: 2020_05_31_195638) do
     t.index ["donor_id"], name: "index_donors_cases_on_donor_id"
   end
 
-  add_foreign_key "charities_cases", "cases"
-  add_foreign_key "charities_cases", "charities"
-  add_foreign_key "donors_cases", "cases"
-  add_foreign_key "donors_cases", "donors"
+  add_foreign_key "charities_cases", "cases", on_delete: :cascade
+  add_foreign_key "charities_cases", "charities", on_delete: :cascade
+  add_foreign_key "donors_cases", "cases", on_delete: :cascade
+  add_foreign_key "donors_cases", "donors", on_delete: :cascade
 end
