@@ -1,4 +1,6 @@
 class Case < ApplicationRecord
+    require 'carrierwave/orm/activerecord'
+    mount_uploader :NID_img, NidUploader
 
     validates :priority, :inclusion => { :in => 1..5 } , allow_nil: true
     validates :national_id, uniqueness: true
