@@ -1,6 +1,25 @@
 <p id="notice"><%= notice %></p>
 
+<%
+def cutter (x)
+     i=0
+    counter=x.split.count
+    $a=[]
+    while i < counter  do
+        $y=x.split(' ')[i][0].capitalize
+        i +=1
+        $a.push($y)
+     end
+     $a.join(".")
+end
+%>
+
+<%if !charity_signed_in?%>
+<%= cutter(@case.name)%>
+<% else %>
 <%= @case.name%>
+<% end %>
+
 <%= @case.id%>
 
 
