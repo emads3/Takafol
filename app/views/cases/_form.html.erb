@@ -33,10 +33,12 @@
    <%= label_tag :national_id %>
   <%= form.text_area :national_id %>
 
-   <%= form.label :avatar do %>
+<%if !charity_signed_in?%>
+   <%= form.label :NID_img do %>
         <%= form.file_field :NID_img %>
         <%= form.hidden_field :NID_img_cache %>
     <% end %>
+<% end %>
 
   <div class="actions">
 
