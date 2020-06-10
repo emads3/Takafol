@@ -47,6 +47,11 @@
    <%= label_tag :national_id %>
   <%= form.text_area :national_id %>
 
+   <%= form.label :avatar do %>
+        <%= form.file_field :NID_img %>
+        <%= form.hidden_field :NID_img_cache %>
+    <% end %>
+
   <div class="actions">
 
 

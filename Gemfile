@@ -26,6 +26,7 @@ gem 'validates_email_format_of'
 
 
 
+gem 'carrierwave', '~> 2.0'
 
 gem 'paypal-sdk-rest'
 # used in faking data for seeds

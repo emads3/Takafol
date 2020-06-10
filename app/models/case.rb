@@ -1,4 +1,6 @@
 class Case < ApplicationRecord
+    require 'carrierwave/orm/activerecord'
+    mount_uploader :NID_img, NidUploader
 
     validates :name , presence: true ,  format: { with: /\A[a-z\s]+\Z/i, message:  "Name must only contain letters." }
     validates :job , presence: true ,  format: { with: /\A[a-z\s]+\Z/i, message:  "Job must only contain letters." }
