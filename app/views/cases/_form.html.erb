@@ -10,15 +10,29 @@
       </ul>
     </div>
   <% end %>
+  
 
-   <%= label_tag :name %>
+  <%= label_tag :name %>
   <%= form.text_area :name %>
 
- <%= label_tag :job %>
+  <%= label_tag :email %>
+  <%= form.text_area :email  %>
+
+  <%= label_tag :job %>
   <%= form.text_area :job %>
 
-   <%= label_tag :description %>
+  <%= label_tag :description %>
   <%= form.text_area :description %>
+
+  <%= label_tag :phone %>
+  <%= form.text_area :phone %>
+
+  <%= label_tag :children_number %>
+  <%= form.select :children_num, [0,1,2,3,4,5,6,7,8]%>
+
+   <%= label_tag :Marital_status %>
+  <%= form.select :marital_status, ["Married","Divorced","Single"]%>
+
 
   <%if charity_signed_in?%>
       

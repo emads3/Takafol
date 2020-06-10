@@ -8,7 +8,7 @@ class DeviseCreateDonors < ActiveRecord::Migration[6.0]
       t.string :encrypted_password, null: false, default: ""
 
       t.string :name
-      t.integer :national_id, null: false
+      t.string :national_id, null: false
       t.string :national_id_img
       t.text :address
 

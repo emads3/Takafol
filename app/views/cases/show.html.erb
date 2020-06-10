@@ -23,6 +23,7 @@ end
 <%= @case.id%>
 
 
+
 <%
 =begin%>
  <%= button_to 'Donate to case' , checkout_create_path , method: :post , params: {id: @case.id} ,remote: true %> 
