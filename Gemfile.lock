@@ -253,6 +253,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    validates_email_format_of (1.6.3)
+      i18n
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.2)
@@ -299,6 +301,7 @@ DEPENDENCIES
   stripe
   turbolinks (~> 5)
   tzinfo-data
+  validates_email_format_of
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
