@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.integer "priority"
     t.text "address"
     t.string "phone"
+    t.string "national_id", null: false
     t.string "NID_img"
-    t.integer "national_id", null: false
     t.decimal "amount_needed", precision: 10, default: "500"
     t.decimal "amount_obtained", precision: 10, default: "0"
     t.datetime "created_at", precision: 6, null: false
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
-    t.integer "national_id", null: false
+    t.string "national_id", null: false
     t.string "national_id_img"
     t.text "address"
     t.string "reset_password_token"

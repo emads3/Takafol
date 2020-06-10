@@ -22,6 +22,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'stripe'
 gem 'activeadmin'
+gem 'validates_email_format_of'
+
+
+
 gem 'carrierwave', '~> 2.0'
 
 gem 'paypal-sdk-rest'

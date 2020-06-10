@@ -1,8 +1,8 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show, :edit, :update, :destroy  ]
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
 
-
+  
   # GET /cases
   # GET /cases.json
   def index
@@ -82,11 +82,11 @@ class CasesController < ApplicationController
     if current_charity 
 
         @case = @current_charity.cases.create(case_params_charity)
-        @case.charities_cases.first.update(state: "protected")
         respond_to do |format|
           if @case.save
             format.html { redirect_to @case, notice: 'Case was successfully created.' }
             format.json { render :show, status: :created, location: @case }
+            @case.charities_cases.first.update(state: "protected")
           else
             format.html { render :new }
             format.json { render json: @case.errors, status: :unprocessable_entity }
@@ -141,11 +141,12 @@ class CasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def case_params
-      params.fetch(:case).permit(:name , :job , :national_id , :description , :NID_img? )
+      params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :description , :NID_img)
+
     end
 
     #Charity's Special Params to add Case
     def case_params_charity
-      params.fetch(:case).permit(:name , :job , :priority , :national_id , :amount_needed)
+      params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed)
     end
 end
