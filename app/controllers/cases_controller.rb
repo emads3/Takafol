@@ -7,6 +7,7 @@ class CasesController < ApplicationController
   # GET /cases.json
   def index
     @cases = Case.all.order(priority: :desc)
+    @governorates = Governorate.all
   end
 
   #Free Cases Index
