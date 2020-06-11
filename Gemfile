@@ -23,7 +23,7 @@ gem 'devise'
 gem 'stripe'
 gem 'activeadmin'
 gem 'validates_email_format_of'
-
+gem 'whenever', require: false
 
 
 gem 'carrierwave', '~> 2.0'
