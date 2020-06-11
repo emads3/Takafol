@@ -1,1 +1,31 @@
-<%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
+<% content_for :headers do %>
+  <%# moved to the main layout, since style of 'home' is essential of header/footer and some other global pages %>
+<% end %>
+
+<% content_for :content do %>
+
+  <div class="container">
+    <div class="row">
+
+      <hr class="tall">
+      <div>
+        <button class="btn btn-primary" id="omda">Bootstrap button</button>
+        Test font awesome Icon
+        <i class="fa fa-github"></i>
+      </div>
+
+
+      <ul class="portfolio-list sort-destination">
+        <%# partial for single case %>
+        <%= render 'case' %>
+      </ul>
+
+
+      <%# khaled's original page conent, TODO: move it to the appropriate page %>
+
+
+    </div>
+  </div>
+  <!--  custom JS for this page (assets/javascript/porto_wrapper)-->
+  <%= javascript_include_tag "porto_wrapper" %>
+<% end %>
