@@ -82,17 +82,14 @@
   </thead>
 
   <tbody>
-   <h3> Cases that are protected by The Donor </h3>
-     <tr>
+   <div> Cases that are protected by The Donor </div>
     <% current_donor.donors_cases.where(state: "approved").each do |c| %>
-        <td> <%= @cases.find(c.case_id).name %></td>
-        <td>  <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%></td>
-       
-
-        <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%>
-
+      <tr>
+          <td> <%= @cases.find(c.case_id).name %></td>
+          <td>  <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%></td>
+          <td><%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%></td>
+      </tr>
     <% end %>
-    </tr>
 
   </tbody>
 </table>
