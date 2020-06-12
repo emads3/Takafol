@@ -9,10 +9,10 @@
 <div class="home-intro-compact" id="home-introCustom">
 	<div class="container">
 
-    <div class="featured-boxes featured-boxes-style-3 featured-boxes-flat">
+    <div class="featured-boxes featured-boxes-style-2 featured-boxes-flat">
 						<div class="row">
 							<div class="col-md-4 col-sm-6">
-								<div class="featured-box featured-box-tertiary featured-box-effect-3">
+								<div class="featured-box featured-box-tertiary featured-box-effect-4">
 									<div class="box-content">
 										<i class="icon-featured fa fa-heart"></i>
 										<h4>Easy</h4>
@@ -21,7 +21,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<div class="featured-box featured-box-tertiary featured-box-effect-3">
+								<div class="featured-box featured-box-tertiary featured-box-effect-4">
 									<div class="box-content">
 										<i class="icon-featured fa fa-check-circle"></i>
 										<h4>Trusted</h4>
@@ -30,7 +30,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-6">
-								<div class="featured-box featured-box-tertiary featured-box-effect-3">
+								<div class="featured-box featured-box-tertiary featured-box-effect-4">
 									<div class="box-content">
 										<i class="icon-featured fa fa-hourglass"></i>
 										<h4>Fast</h4>
@@ -45,29 +45,50 @@
 	</div>
 </div>
 
+<%# <<<<statistics>>>> %>
 
-  <div class="container">
-    <div class="row">
+<section class="section section-default section-default-scale-8">
+	<div class="container">
+		<div class="row">
+			<div class="counters counters-text-light">
+				<div class="col-md-3 col-sm-6">
+					<div class="counter">
+						<strong data-to="1000" data-append="+">1000+</strong>
+						<label>Happy Clients</label>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="counter">
+						<strong data-to="5">5</strong>
+						<label>Years in Business</label>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="counter">
+						<strong data-to="352">352</strong>
+						<label>Closed Cases</label>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="counter">
+						<strong data-to="178">178</strong>
+						<label>Adapted Cases</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-      <hr class="tall">
-      <div>
-        <button class="btn btn-primary" id="omda">Bootstrap button</button>
-        Test font awesome Icon
-        <i class="fa fa-github"></i>
-      </div>
 
 
-      <ul class="portfolio-list sort-destination">
-        <%# partial for single case %>
         <%= render 'case' %>
-      </ul>
 
 
       <%# khaled's original page conent, TODO: move it to the appropriate page %>
 
 
-    </div>
-  </div>
+
   <!--  custom JS for this page (assets/javascript/porto_wrapper)-->
   <%= javascript_include_tag "porto_wrapper" %>
 <% end %>
