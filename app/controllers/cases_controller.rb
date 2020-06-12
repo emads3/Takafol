@@ -46,9 +46,9 @@ class CasesController < ApplicationController
 
   #Search Button
   def search
-    search = params[:search].present? ? params[:search] : nil 
+    search = params[:search].present? ? params[:search] : nil
 
-    @cases = 
+    @cases =
     if search
       Case.where(job: search)
     end
@@ -90,7 +90,7 @@ class CasesController < ApplicationController
   def create
 
     #If a Charity is signed in the case will be assigned to it automatically
-    if current_charity 
+    if current_charity
 
         @case = @current_charity.cases.create(case_params_charity)
         respond_to do |format|
@@ -104,7 +104,7 @@ class CasesController < ApplicationController
           end
         end
 
-      else 
+      else
 
         @case = Case.new(case_params)
         respond_to do |format|
@@ -152,11 +152,11 @@ class CasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def case_params
-      params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :NID_img, :description)
+      params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :NID_img, :description, :city_id)
     end
 
     #Charity's Special Params to add Case
     def case_params_charity
-      params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed)
+      params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed, :city_id)
     end
 end

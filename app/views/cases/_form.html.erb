@@ -10,13 +10,13 @@
       </ul>
     </div>
   <% end %>
-  
+
 
   <%= label_tag :name %>
   <%= form.text_area :name %>
 
   <%= label_tag :email %>
-  <%= form.text_area :email  %>
+  <%= form.text_area :email %>
 
   <%= label_tag :job %>
   <%= form.text_area :job %>
@@ -28,35 +28,71 @@
   <%= form.text_area :phone %>
 
   <%= label_tag :children_number %>
-  <%= form.select :children_num, [0,1,2,3,4,5,6,7,8]%>
+  <%= form.select :children_num, [0, 1, 2, 3, 4, 5, 6, 7, 8] %>
 
-   <%= label_tag :Marital_status %>
-  <%= form.select :marital_status, ["Married","Divorced","Single"]%>
+  <%= label_tag :Marital_status %>
+  <%= form.select :marital_status, ["Married", "Divorced", "Single"] %>
 
 
-  <%if charity_signed_in?%>
-      
-      <%= label_tag :priority %>
-      <%= form.select :priority, [1,2,3,4,5]%>
+  <% if charity_signed_in? %>
 
-      <%= label_tag :amount_needed %>
-      <%= form.text_area :amount_needed %>
+    <%= label_tag :priority %>
+    <%= form.select :priority, [1, 2, 3, 4, 5] %>
+
+    <%= label_tag :amount_needed %>
+    <%= form.text_area :amount_needed %>
   <% end %>
 
 
-   <%= label_tag :national_id %>
+  <%= label_tag :national_id %>
   <%= form.text_area :national_id %>
 
-<%if !charity_signed_in?%>
-   <%= form.label :NID_img do %>
-        <%= form.file_field :NID_img %>
-        <%= form.hidden_field :NID_img_cache %>
+  <% if !charity_signed_in? %>
+    <%= form.label :NID_img do %>
+      <%= form.file_field :NID_img %>
+      <%= form.hidden_field :NID_img_cache %>
     <% end %>
-<% end %>
-
-  <div class="actions">
+  <% end %>
 
 
+  <select id="select_gov"></select>
+  <select id="city_id" name='case[city_id]' style="display: none;"></select>
+
+
+  <script>
+	  <%= render 'governorates_and_cities_db' %>
+	  // to make the first gov is empty, to force the user to chose a gov
+	  // so that the event is triggered
+	  let emptyGov = document.createElement('option');
+	  emptyGov.value = -1;
+	  emptyGov.text = 'Select Gov';
+	  document.getElementById('select_gov').appendChild(emptyGov);
+
+	  govs.forEach(gov => {
+		  let op = document.createElement('option');
+		  op.value = gov.id;
+		  op.text = gov.name;
+		  document.getElementById('select_gov').appendChild(op);
+	  });
+
+	  document.getElementById('select_gov').addEventListener('change', function () {
+
+		  let selectCityElement = document.getElementById('city_id');
+		  selectCityElement.style.display = 'inline';
+
+		  selectCityElement.innerHTML = '';
+		  let selectedGovId = parseInt(this.value);
+		  let govCities = cities.filter(city => city.governorate_id === selectedGovId);
+		  govCities.forEach(gov => {
+			  let singleCity = document.createElement('option');
+			  singleCity.value = gov.id;
+			  singleCity.text = gov.name;
+			  selectCityElement.appendChild(singleCity);
+		  });
+	  });
+  </script>
+
+  <div class="action">
     <%= form.submit %>
   </div>
 <% end %>

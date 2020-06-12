@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_082934) do
+ActiveRecord::Schema.define(version: 2020_06_12_033951) do
 
-  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "cases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "job"
     t.text "description"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.string "marital_status"
     t.string "email"
     t.integer "priority"
-    t.text "address"
     t.string "phone"
     t.string "national_id", null: false
     t.string "NID_img"
@@ -54,9 +53,11 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.decimal "amount_obtained", precision: 10, default: "0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "city_id", null: false
+    t.index ["city_id"], name: "index_cases_on_city_id"
   end
 
-  create_table "charities", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "charities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
@@ -72,7 +73,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.index ["reset_password_token"], name: "index_charities_on_reset_password_token", unique: true
   end
 
-  create_table "charities_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "charities_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -82,7 +83,14 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.index ["charity_id"], name: "index_charities_cases_on_charity_id"
   end
 
-  create_table "donors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "name_en"
+    t.bigint "governorate_id", null: false
+    t.index ["governorate_id"], name: "index_cities_on_governorate_id"
+  end
+
+  create_table "donors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
@@ -98,7 +106,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.index ["reset_password_token"], name: "index_donors_on_reset_password_token", unique: true
   end
 
-  create_table "donors_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "donors_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -108,8 +116,15 @@ ActiveRecord::Schema.define(version: 2020_06_09_082934) do
     t.index ["donor_id"], name: "index_donors_cases_on_donor_id"
   end
 
+  create_table "governorates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "name_en"
+  end
+
+  add_foreign_key "cases", "cities"
   add_foreign_key "charities_cases", "cases", on_delete: :cascade
   add_foreign_key "charities_cases", "charities", on_delete: :cascade
+  add_foreign_key "cities", "governorates", on_delete: :cascade
   add_foreign_key "donors_cases", "cases", on_delete: :cascade
   add_foreign_key "donors_cases", "donors", on_delete: :cascade
 end
