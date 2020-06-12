@@ -53,25 +53,25 @@
 			<div class="counters counters-text-light">
 				<div class="col-md-3 col-sm-6">
 					<div class="counter">
-						<strong data-to="1000" data-append="+">1000+</strong>
-						<label>Happy Clients</label>
+						<strong data-to=<%=CharitiesCase.all.count%> data-append="+">1000+</strong>
+						<label>Verified Cases</label>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="counter">
-						<strong data-to="5">5</strong>
-						<label>Years in Business</label>
+						<strong data-to=<%=Charity.all.count%>>5</strong>
+						<label>Registered Charities</label>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="counter">
-						<strong data-to="352">352</strong>
-						<label>Closed Cases</label>
+						<strong data-to=<%=Donor.all.count%>>352</strong>
+						<label>Registered Donors</label>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="counter">
-						<strong data-to="178">178</strong>
+						<strong data-to=<%=DonorsCase.all.count%>>178</strong>
 						<label>Adapted Cases</label>
 					</div>
 				</div>
