@@ -3,7 +3,7 @@ puts 'Running charity seeder..'
 50.times do
   Charity.create(
     email: Faker::Internet.unique.email,
-    password: Faker::Internet.password,
+    password: '123123',
     name: Faker::Restaurant.unique.name,
     address: Faker::Address.unique.full_address,
     phone_number: Faker::PhoneNumber.unique.cell_phone_with_country_code,
