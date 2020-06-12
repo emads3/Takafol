@@ -1,10 +1,8 @@
 class CasesController < ApplicationController
-
-
   before_action :set_case, only: [:show, :edit, :update, :destroy  ]
   # skip_before_action :verify_authenticity_token
 
-  
+
   # GET /cases
   # GET /cases.json
   def index
@@ -46,6 +44,17 @@ class CasesController < ApplicationController
     redirect_to cases_path
   end
 
+  #Search Button
+  def search
+    search = params[:search].present? ? params[:search] : nil 
+
+    @cases = 
+    if search
+      Case.where(job: search)
+    end
+
+  end
+
 
   #Remove Donor's Protection
   def remove
@@ -84,10 +93,7 @@ class CasesController < ApplicationController
     if current_charity 
 
         @case = @current_charity.cases.create(case_params_charity)
-        @case.perform_image_validation = false 
-
         respond_to do |format|
-
           if @case.save
             format.html { redirect_to @case, notice: 'Case was successfully created.' }
             format.json { render :show, status: :created, location: @case }
@@ -101,8 +107,6 @@ class CasesController < ApplicationController
       else 
 
         @case = Case.new(case_params)
-        @case.perform_image_validation = true 
-
         respond_to do |format|
           if @case.save
             format.html { redirect_to @case, notice: 'Case was successfully created.' }
@@ -148,12 +152,11 @@ class CasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def case_params
-      params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :description , :NID_img)
-
+      params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :NID_img, :description)
     end
 
     #Charity's Special Params to add Case
     def case_params_charity
-      params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed )
+      params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed)
     end
 end

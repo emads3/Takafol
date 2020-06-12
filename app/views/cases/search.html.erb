@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%if !@cases.empty? %>
+
 <h1>Cases</h1>
 
 
@@ -61,7 +63,15 @@ end
   </tbody>
 </table>
 
-<br>
+<% else %>
+
+<h1> There is no such case with this Job/Address  </h1>
+
+
+<% end %>
+
+
+
 
 <%= link_to 'New Case', new_case_path %>
 
@@ -73,4 +83,3 @@ end
 <%if charity_signed_in? %>
 <%= link_to 'Unprotected Cases', free_cases_path %>
 <% end %>
-

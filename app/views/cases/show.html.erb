@@ -24,10 +24,10 @@ end
 
 
 
-<%
+<%#
 =begin%>
- <%= button_to 'Donate to case' , checkout_create_path , method: :post , params: {id: @case.id} ,remote: true %> 
-<%
+ <%#= button_to 'Donate to case' , checkout_create_path , method: :post , params: {id: @case.id} ,remote: true %>
+<%#
 =end%>
 
 <% if @case.amount_needed >= @case.amount_obtained%>
@@ -36,7 +36,7 @@ end
     <tr>
         <th>  Needed </th>
         <th> Received</th>
-        <th> Remaining</th>  
+        <th> Remaining</th>
     </tr>
 
     <tr>
@@ -74,7 +74,7 @@ end
 <% if !current_charity.cases.empty? %>
     <% if !current_charity.cases.where(id: @case.id).last.donors_cases.empty? %>
         <% if !current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor.nil? %>
-            
+
             <div> Donor Requested_id : </div>
             <%= current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
 
@@ -82,7 +82,7 @@ end
             <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %>
 
 
-            
+
             <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
 
             <%= f.fields_for :donors_cases do |d| %>

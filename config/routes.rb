@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'cases/cancel' , :to => 'cases#remove' , as:'donor_cancel'
   post 'cases/protect' , :to => 'cases#protect' , as: 'donor_protect'
   put 'cases/updatestate/:id', to: 'cases#updatestate'
+  get 'search/:q' , to: 'cases#search' , as: 'search'
+
 
 
   resources :cases do
