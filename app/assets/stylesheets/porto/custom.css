@@ -1,1 +1,23 @@
 /* Add here all your CSS customizations */
+
+
+html .featured-box-tertiary .box-content {
+    border-top-color: #47a447;
+}
+
+html .featured-boxes-style-3 .featured-box.featured-box-tertiary .icon-featured {
+    border-color: #47a447;
+    color: #47a447;
+}
+
+html .featured-box-effect-3.featured-box-tertiary:hover .icon-featured {
+    background: #47a447 !important;
+}
+
+html .featured-box-effect-3.featured-box-tertiary .icon-featured::after {
+    box-shadow: 0 0 0 10px #47a447;
+}
+
+html .featured-box-tertiary h4 {
+    color: #47a447;
+}
