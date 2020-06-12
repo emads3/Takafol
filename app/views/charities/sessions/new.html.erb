@@ -1,29 +1,105 @@
-<% if !donor_signed_in? %>
+<% content_for :content do %>
+  <div class="container">
+    <div class="row">
 
-<h2>Log in</h2>
+      <div class="col-md-6">
+        <div class="tabs">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#popular" data-toggle="tab"><i class="fa fa-star"></i> Login</a>
+            </li>
+            <li>
+              <a href="#recent" data-toggle="tab"> Sign up</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="popular" class="tab-pane active">
+              <% if !charity_signed_in? %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+                <h2>Log in</h2>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <div class="field">
+                    <%= f.label :email %><br/>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                  </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                  <div class="field">
+                    <%= f.label :password %><br/>
+                    <%= f.password_field :password, autocomplete: "current-password" %>
+                  </div>
+
+                  <% if devise_mapping.rememberable? %>
+                    <div class="field">
+                      <%= f.check_box :remember_me %>
+                      <%= f.label :remember_me %>
+                    </div>
+                  <% end %>
+
+                  <div class="actions">
+                    <%= f.submit "Log in" %>
+                  </div>
+                <% end %>
+
+                <%= render "charities/shared/links" %>
+              <% end %>
+
+            </div>
+            <div id="recent" class="tab-pane">
+              <% if !charity_signed_in? %>
+                <h2>Sign up</h2>
+
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <%= render "devise/shared/error_messages", resource: resource %>
+
+                  <div class="field">
+                    <%= label_tag :name %>
+                    <%= f.text_area :name %>
+                  </div>
+
+
+                  <div class="field">
+                    <%= f.label :email %><br/>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                  </div>
+
+                  <div class="field">
+                    <%= label_tag :phone %>
+                    <%= f.text_area :phone_number %>
+                  </div>
+
+                  <div class="field">
+                    <%= label_tag :description %>
+                    <%= f.text_area :description %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :password %>
+                    <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %><br/>
+                    <%= f.password_field :password, autocomplete: "new-password" %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :password_confirmation %><br/>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                  </div>
+
+                  <div class="actions">
+                    <%= f.submit "Sign up" %>
+                  </div>
+                <% end %>
+
+                <%= render "charities/shared/links" %>
+
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "charities/shared/links" %>
 <% end %>
