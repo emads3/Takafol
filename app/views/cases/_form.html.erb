@@ -59,8 +59,8 @@
   <select id="city_id" name='case[city_id]' style="display: none;"></select>
 
 
+  <%= render 'governorates_and_cities_db' %>
   <script>
-	  <%= render 'governorates_and_cities_db' %>
 	  // to make the first gov is empty, to force the user to chose a gov
 	  // so that the event is triggered
 	  let emptyGov = document.createElement('option');
