@@ -42,7 +42,7 @@ class CasesController < ApplicationController
     @case = Case.find(params["id"])
     @case.charities << current_charity
     @case.charities_cases.update(state: "protected" )
-    redirect_to cases_path
+    redirect_to :free_cases
   end
 
   #Search Button
