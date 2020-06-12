@@ -1,3 +1,20 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import "porto/vendor/animate.min";;
+@import "porto/vendor/simple-line-icons.min";
+@import "porto/vendor/owl.carousel.min";
+@import "porto/vendor/owl.theme.default.min";
+@import "porto/vendor/magnific-popup.min";
+
+@import "porto/theme";
+@import "porto/theme-elements";
+@import "porto/theme-blog";
+@import "porto/theme-shop";
+
+@import "porto/vendor/settings";
+@import "porto/vendor/layers";
+@import "porto/vendor/navigation";
+@import "porto/vendor/component";
+
+@import "porto/skins/default";
+
+@import "porto/custom";
