@@ -11,7 +11,8 @@ Charity.take(30).each do |ch|
       children_num: Faker::Number.between(from: 0, to: 20),
       marital_status: %w[single divorced].sample,
       priority: Faker::Number.between(from: 0, to: 5),
-      address: Faker::Address.unique.full_address,
+      # address: Faker::Address.unique.full_address,
+      city_id: Faker::Number.between(from: 1, to: 250),
       phone: Faker::PhoneNumber.unique.cell_phone_with_country_code,
       national_id: Faker::IDNumber.ssn_valid
     ).save(validate: false)
@@ -27,7 +28,8 @@ end
     children_num: Faker::Number.between(from: 0, to: 20),
     marital_status: %w[single divorced].sample,
     priority: Faker::Number.between(from: 0, to: 5),
-    address: Faker::Address.unique.full_address,
+    # address: Faker::Address.unique.full_address,
+    city_id: Faker::Number.between(from: 1, to: 250),
     phone: Faker::PhoneNumber.unique.cell_phone_with_country_code,
     national_id: Faker::IDNumber.ssn_valid
   ).save(validate: false)

@@ -3,7 +3,7 @@ puts 'Running donor seeder..'
 25.times do
   Donor.create(
     email: Faker::Internet.unique.email,
-    password: Faker::Internet.password,
+    password: '123123',
     name: Faker::Name.unique.name,
     national_id: Faker::IDNumber.ssn_valid,
     # national_id_img:

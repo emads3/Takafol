@@ -83,14 +83,14 @@ ActiveRecord::Schema.define(version: 2020_06_12_033951) do
     t.index ["charity_id"], name: "index_charities_cases_on_charity_id"
   end
 
-  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "name_en"
     t.bigint "governorate_id", null: false
     t.index ["governorate_id"], name: "index_cities_on_governorate_id"
   end
 
-  create_table "donors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "donors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_033951) do
     t.index ["donor_id"], name: "index_donors_cases_on_donor_id"
   end
 
-  create_table "governorates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "governorates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "name_en"
   end
