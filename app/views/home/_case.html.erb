@@ -65,7 +65,7 @@ end
 							<h6 class="mb-lg">Job: <%= c.job %></h6>
 							<h6 class="mb-lg">Children: <%= c.children_num%></h6>
 							<hr>
-							<p><%= c.description.truncate(50, separator: /\s/) %></p>
+							<p><%= c.description.truncate(40) %></p>
 							<h6 class="mb-lg">This month donations:</h6>
 							<div class="progress">
 								<div class="progress-bar progress-bar-tertiary" data-appear-progress-animation=<%= percentage(c.amount_needed,c.amount_obtained) %> data-appear-animation-delay="600" style="width: 75%;">
