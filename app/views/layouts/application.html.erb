@@ -28,17 +28,14 @@
   <%= render 'common-partials/header' %>
   <div role="main" class="main">
     <%= yield(:content) %>
+    <!--  custom JS for this page (assets/javascript/porto_wrapper)-->
+    <%= javascript_include_tag "porto_wrapper" %>
     <!--
     for the content
     please follow the structure of the page like: home/index
     div.container>div.row
     -->
-    <div class="container">
-      <div class="row">
 
-
-      </div>
-    </div>
 
   </div>
 
