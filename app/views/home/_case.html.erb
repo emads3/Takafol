@@ -17,62 +17,55 @@
   </div>
 </li> %>
 
+<%
+def cutter (x)
+     i=0
+    counter=x.split.count
+    $a=[]
+    while i < counter  do
+        $y=x.split(' ')[i][0].capitalize
+        i +=1
+        $a.push($y)
+     end
+     $a.join(".")
+end
+%>
 
-
-						<%# <div class=row>
-							<div class="col-md-4">
-								<div class="featured-box featured-box-quaternary mt-sm" style="height: 377px;">
-									<div class="box-content">
-										<div class="row">
-											<div class="col-md-12">
-												<i class="icon-featured fa fa-cogs m-none"></i>
-												<h2 class="mb-lg">Customizable</h2>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit.</p>
-												<div class="divider divider-small divider-small-center">
-													<hr>
-												</div>
-												<button class="btn btn-quaternary mr-xs mb-lg" type="button">Learn More</button>
-											</div>
-										</div>
-									</div>
-								</div>
+<div class="container">
+	<div class=row>
+		<% Case.all.each do |c| %>
+		<% if  !c.charities.empty? && c.donors.empty? %>
+        <% if c.charities_cases.last.state == "protected" && c.amount_needed >= c.amount_obtained%>
+		<div class="col-md-4">
+			<div class="featured-box featured-box-quaternary mt-sm" style="height: 377px;">
+				<div class="box-content">
+					<div class="row">
+						<div class="col-md-12">
+							<%# <i class="icon-featured fa fa-cogs m-none"></i> %>
+							<%if !charity_signed_in?%>
+							<h2 class="mb-lg"><%= cutter(c.name)%></h2>
+							<% else %>
+							<h2 class="mb-lg"><%= c.name%></h2>
+							<% end %>
+							<h6 class="mb-lg">Job: <%= c.job %></h6>
+							<h6 class="mb-lg">Children: <%= c.children_num%></h6>
+							<hr>
+							<p><%= c.description %></p>
+							<div class="divider divider-small divider-small-center">
+								<hr>
 							</div>
-							<div class="col-md-4">
-								<div class="featured-box featured-box-quaternary mt-sm" style="height: 377px;">
-									<div class="box-content">
-										<div class="row">
-											<div class="col-md-12">
-												<i class="icon-featured fa fa-cogs m-none"></i>
-												<h2 class="mb-lg">Customizable</h2>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit.</p>
-												<div class="divider divider-small divider-small-center">
-													<hr>
-												</div>
-												<button class="btn btn-quaternary mr-xs mb-lg" type="button">Learn More</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="featured-box featured-box-quaternary mt-sm" style="height: 377px;">
-									<div class="box-content">
-										<div class="row">
-											<div class="col-md-12">
-												<i class="icon-featured fa fa-cogs m-none"></i>
-												<h2 class="mb-lg">Customizable</h2>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing metus elit. Quisque rutrum pellentesque imperdiet. Quisque rutrum pellentesque imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing metus elit.</p>
-												<div class="divider divider-small divider-small-center">
-													<hr>
-												</div>
-												<button class="btn btn-quaternary mr-xs mb-lg" type="button">Learn More</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> %>
+							<button class="btn btn-quaternary mr-xs mb-lg" type="button">Learn More</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%>
+		<%end%>
+		<%end%>
+
+	</div>
+</div>
 
 
 
-					
