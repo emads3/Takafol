@@ -4,22 +4,7 @@
     background: #FFF;
     border-top: 0px;}
 
-#header .header-nav.header-nav-stripe nav > ul > li:hover > a {
-    background-color: #282828;
-}
 
-#header .header-nav-main nav > ul > li.dropdown .dropdown-menu {
-    border-top-color: #47a447;
-}
-
-#header .header-nav.header-nav-stripe nav > ul > li:not(:hover).active > a {
-    color: #47a447;
-}
-
-
-#header .header-nav.header-nav-stripe nav > ul > li:not(:hover).active > a.dropdown-toggle::after {
-    border-color: #47a447 transparent transparent transparent;
-}
 
 
 html .featured-box-tertiary .icon-featured{
