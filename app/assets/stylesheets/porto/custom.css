@@ -1,5 +1,11 @@
 /* Add here all your CSS customizations */
 
+#header .header-body {
+    background: #FFF;
+    border-top: 0px;}
+
+
+
 
 html .featured-box-tertiary .icon-featured{
     background-color: #47a447;
@@ -71,4 +77,8 @@ ul.portfolio-list {
 
 .sort-destination-loader.sort-destination-loader-showing::after{
     opacity:0;
+}
+
+html .progress-bar-tertiary {
+    background-color: #47a447;
 }
