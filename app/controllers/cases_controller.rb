@@ -8,6 +8,7 @@ class CasesController < ApplicationController
   def index
     @cases = Case.all.order(priority: :desc)
     @governorates = Governorate.all
+    # @cases =Case.all.page params[:page]
   end
 
   #Free Cases Index
@@ -18,6 +19,7 @@ class CasesController < ApplicationController
   #Profile
   def profile
     @cases = Case.all
+    render 'profile'
   end
 
   # GET /cases/1
@@ -92,7 +94,7 @@ class CasesController < ApplicationController
 
     #If a Charity is signed in the case will be assigned to it automatically
     if current_charity
-
+      @case.perform_image_validation = false 
         @case = @current_charity.cases.create(case_params_charity)
         respond_to do |format|
           if @case.save
@@ -108,6 +110,8 @@ class CasesController < ApplicationController
       else
 
         @case = Case.new(case_params)
+        @case.perform_image_validation = true 
+
         respond_to do |format|
           if @case.save
             format.html { redirect_to @case, notice: 'Case was successfully created.' }
@@ -144,6 +148,8 @@ class CasesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
