@@ -11,7 +11,6 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <script src="https://js.stripe.com/v3/"></script>
     <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
   <!--  custom style for this page (assets/stylesheets/home)-->
@@ -42,6 +41,7 @@
   <%= yield %>
   <%= render 'common-partials/footer' %>
 </div>
+    <script src="https://js.stripe.com/v3/"></script>
 
 </body>
 </html>

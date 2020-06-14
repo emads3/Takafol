@@ -74,13 +74,11 @@
 						<ul class="nav nav-list mb-xl show-bg-active">
 							<li class="active"><a data-hash data-hash-offset="85" href=<%=profile_path%>>Profile</a></li>
 							<li>
-								<a data-hash data-hash-offset="85" href="">Cases</a>
-								<ul>
-									<li><a data-hash data-hash-offset="85" href=<%=my_cases_path%>>My Cases</a></li>
-									<li><a data-hash data-hash-offset="85" href=<%=free_cases_path%>>Free Cases</a></li>
-								</ul>
+								<a data-hash data-hash-offset="85" href=<%=donor_cases_path%>>My Cases</a>
+								
+								
 							</li>
-							<li><a data-hash data-hash-offset="85" href="#third">Donation Requests</a></li>
+							<li><a data-hash data-hash-offset="85" href=<%=donor_pending_path%>>Donation Requests</a></li>
 						</ul>
 
 					</aside>
@@ -93,7 +91,7 @@
 
 	<div class="feature-box">
 								<div class="feature-box-icon">
-									<i class="fa fa-group"></i>
+									<i class="fa fa-user"></i>
 								</div>
 								<div class="feature-box-info">
 										<h2 class="mb-sm" id="first"><%=  current_donor.name ? current_donor.name : "Undefined"  %></h2>
@@ -133,7 +131,7 @@
 
 	<div class="row">
 		<div class="alert alert-danger">
-		<strong>Oh!</strong> You are not authorized to see this page.<%= link_to "Sign in as charity", new_charity_session_path, :class => "alert-link" %> or 
+		<strong>Oh!</strong> You are not authorized to view this page.<%= link_to "Sign in as charity", new_charity_session_path, :class => "alert-link" %> or 
                              <%= link_to "Sign in as donor", new_donor_session_path, :class => "alert-link" %> to view this.
 		</div>
 	</div>
