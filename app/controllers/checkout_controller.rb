@@ -26,7 +26,7 @@ class CheckoutController < ApplicationController
         end
     end
 
-    
+
     def success
         @session = Stripe::Checkout::Session.retrieve(params[:session_id])
         @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
@@ -36,13 +36,13 @@ class CheckoutController < ApplicationController
         if @case.amount_obtained.nil?
             @total = @amount_received /100
         else
-            @total = (@case.amount_obtained +  @amount_received)/100
+            @total = @case.amount_obtained + @amount_received / 100
         end
         @case.update(amount_obtained: @total )
     end
 
 
     def cancel
-    
+
     end
 end

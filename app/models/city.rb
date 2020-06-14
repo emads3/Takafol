@@ -1,4 +1,4 @@
 class City < ApplicationRecord
-  belongs_to :governate
+  belongs_to :governorate
   has_many :cases
 end

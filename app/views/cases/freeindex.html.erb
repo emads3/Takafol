@@ -53,9 +53,22 @@
 				</div>
 
 
-<% else %>
+    <br>
+    <div style="text-align: center;">
+	    <%= link_to 'Home', cases_path , :class => "btn" %> |
+        <%= link_to 'New Case', new_case_path, :class => "btn" %>
 
-<div> You're not authorized to view this page </div>
+     </div>
+        <% else %>
+        <div class="container">
+
+				<div class="row">
+				<div class="alert alert-danger">
+				<strong>Oh!</strong> You are not authorized to see this page.<%= link_to "Sign in as charity", new_charity_session_path, :class => "alert-link" %> to view this.
+				</div>
+				</div>
+				</div>
+        <% end %>
 
 <% end %>
 
