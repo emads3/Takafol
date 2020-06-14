@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post 'cases/protect' , :to => 'cases#protect' , as: 'donor_protect'
   put 'cases/updatestate/:id', to: 'cases#updatestate'
   get 'search/:q' , to: 'cases#search' , as: 'search'
-
+  get 'charity/cases' , to: 'cases#loggedCharity_cases' , as: 'my_cases'
 
 
   resources :cases do
