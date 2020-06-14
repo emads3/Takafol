@@ -1,106 +1,66 @@
-<%if current_charity%>
+			<%if current_charity%>	
+        <div class="container">
 
-<p id="notice"><%= notice %></p>
+					<div class="row">
+						<div class="col-md-3">
+							<aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options="{'minWidth': 991, 'containerSelector': '.container', 'padding': {'top': 110}}">
 
-<h1>Profile Info </h1>
+								<h4 class="heading-primary"></h4>
+								<ul class="nav nav-list mb-xl show-bg-active">
+									<li class="active"><a data-hash data-hash-offset="85" href=<%=profile_path%>>Profile</a></li>
+									<li>
+										<a data-hash data-hash-offset="85" href="">Cases</a>
+										<ul>
+											<li><a data-hash data-hash-offset="85" href=<%=my_cases_path%>>My Cases</a></li>
+											<li><a data-hash data-hash-offset="85" href=<%=free_cases_path%>>Free Cases</a></li>
+										</ul>
+									</li>
+									<li><a data-hash data-hash-offset="85" href="#third">Donation Requests</a></li>
+								</ul>
 
-<table>
-  <tr>
-    <th> Name </th>
-    <th>Description</th>
-    <th>Phone number </th>
-    <th>Address</th>
-    <th>Email</th>
-    <th>Edit Profile</th>
-  </tr>
+							</aside>
+						</div>
+						<div class="col-md-9">
 
-  <tr>
-    <td><%=  current_charity.name ? current_charity.name : "Undefined"  %></td>
-    <td><%=  current_charity.description ? current_charity.description : "Undefined"  %></td>
-    <td><%=  current_charity.phone_number ? current_charity.phone_number : "Undefined"  %></td>
-     <td><%=  current_charity.address ? current_charity.address : "Undefined"  %></td>
-    <td><%=  current_charity.email ? current_charity.email : "Undefined"  %></td>
-    <td><%= link_to 'Edit Profile', edit_charity_registration_path %></td>
-  </tr>
-
-</table>
-
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-   <h3> Cases that are protected by The Charity </h3>
-     <tr>
-    <% current_charity.charities_cases.where(state: "protected").each do |c| %>
-        <td> <%= @cases.find(c.case_id).name %></td>
-        <td> <%= link_to 'Dump Case', @cases.find(c.case_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-    <% end %>
-    </tr>
-
-  </tbody>
-</table>
-
-<br>
-
-<%elsif current_donor%>
-
-<p id="notice"><%= notice %></p>
-
-<h1>Profile Info </h1>
-
-<table>
-  <tr>
-    <th> Name </th>
-    <th>National Id</th>
-    <th>Address</th>
-    <th>Email</th>
-    <th>Edit Profile</th>
-  </tr>
-
-  <tr>
-    <td><%=  current_donor.name ? current_donor.name : "Undefined"  %></td>
-    <td><%=  current_donor.national_id ? current_donor.national_id : "Undefined"  %></td>
-     <td><%=  current_donor.address ? current_donor.address : "Undefined"  %></td>
-    <td><%=  current_donor.email ? current_donor.email : "Undefined"  %></td>
-    <td><%= link_to 'Edit Profile', edit_donor_registration_path %></td>
-  </tr>
-
-</table>
+            <div class="col-md-12">
 
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-   <div> Cases that are protected by The Donor </div>
-    <% current_donor.donors_cases.where(state: "approved").each do |c| %>
-      <tr>
-          <td> <%= @cases.find(c.case_id).name %></td>
-          <td>  <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%></td>
-          <td><%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @cases.find(c.case_id)}%></td>
-      </tr>
-    <% end %>
+            <div class="feature-box">
+										<div class="feature-box-icon">
+											<i class="fa fa-group"></i>
+										</div>
+										<div class="feature-box-info">
+												<h2 class="mb-sm" id="first"><%=  current_charity.name ? current_charity.name : "Undefined"  %></h2>
+											<div class="divider divider-small">
+												<hr>
+											</div>
+										</div>
+									</div>
+								</div>
 
-  </tbody>
-</table>
 
-<br>
+									<dl>
+                  <dt>About</dt>
+										<dd><%=  current_charity.description ? current_charity.description : "Undefined"  %></dd>
+										
+										<dt>Phone number</dt>
+										<dd><%=  current_charity.phone_number ? current_charity.phone_number : "Undefined"  %></dd>
+										<dt>Address</dt>
+										<dd><%=  current_charity.address ? current_charity.address : "Undefined"  %></dd>
+										
+										<dt>Email-Address</dt>
+										<dd><%=  current_charity.email ? current_charity.email : "Undefined"  %></dd>
+                    <%= link_to 'Edit Profile', edit_charity_registration_path ,:class => "btn btn-quaternary mr-xs mb-sm" %>
+									</dl>
 
-<%else%>
 
-<h1> You are not authorized to view this page </h1>
+
+							
+						</div>
+
+					</div>
+
+				</div>
 
 <%end%>
-
-<%= link_to 'New Case', new_case_path %>
-<%= link_to 'Show Profile', profile_path %> |
