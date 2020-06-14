@@ -42,10 +42,12 @@ class CasesController < ApplicationController
   def remove
     id = current_donor.id
     @case = Case.find(params["id"])
-    @case = @case.donors_cases.where(donor_id = "#{id}").update(state: "cancelled")
-    redirect_to case_path(@case)
+    @case = @case.donors_cases.where(donor_id = "#{id}").first.update(state: "cancelled")
+    redirect_to cases_path
     
   end
+
+
 
   #Charity's Approval to Donor's Request
   def updatestate
@@ -147,6 +149,15 @@ class CasesController < ApplicationController
     @cases = Case.all.where(charity_id = "#{id}")
   end
 
+  def logged_donor_cases
+    id = current_donor.id
+    @cases = Case.all.where(id:(DonorsCase.all.where(donor_id:"#{id}", state:"approved")))
+  end
+
+  def logged_donor_pending_cases
+    id = current_donor.id
+    @cases = Case.all.where(id:(DonorsCase.all.where(donor_id:"#{id}", state:"pending")))
+  end
   #Search Button
   def search
     search = params[:search].present? ? params[:search] : nil
