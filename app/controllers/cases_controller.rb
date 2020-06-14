@@ -52,7 +52,10 @@ class CasesController < ApplicationController
     @id = params["id"].to_i
     @case =Case.find(@id)
     @case.donors_cases.last.update(state: params["case"]["donors_cases"]["state"])
-    @case.charities_cases.last.update(state: "released")
+    if @case.donors_cases.last.update(state: params["case"]["donors_cases"]["state"])=="approved"
+      @case.charities_cases.last.update(state: "released")
+    end
+    redirect_to case_path(@case)
     # redirect_to hi
     # render plain("hiiii")
 
