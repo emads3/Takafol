@@ -49,7 +49,7 @@ end
 <div class="container">
 	<div class=row>
 		<% Case.all.each do |c| %>
-		<% if  !c.charities.empty? && !c.donors.empty? %>
+	<% if  !c.charities.empty? || !c.donors.empty? %>
         <% if c.charities_cases.last.state == "protected" && c.amount_needed >= c.amount_obtained%>
 		<div class="col-md-4 appear-animation animated fadeInRight appear-animation-visible" data-appear-animation="fadeInRight" data-appear-animation-delay="0" data-appear-animation-duration="1s">
 			<div class="featured-box featured-box-quaternary mt-sm" style="height: 377px;">
