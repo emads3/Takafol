@@ -1,38 +1,103 @@
-<%if charity_signed_in? %>
-<p id="notice"><%= notice %></p>
+<%
+def percentage(needed, obtained)
+	if(needed > obtained)
+	result = (obtained.to_f / needed) * 100
+	
+	return result.to_s + "%"
+	else
+	return 100.to_s + "%"
+	end
+end
+%>
 
-<h1>Cases</h1>
+<div class="container">
+  <div class="row">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <%if charity_signed_in? %>
+    <p id="notice"><%= notice %></p>
 
-  <tbody>
-   <div> Cases that are protected by charities </div>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-    <% @cases.each do |c| %>
-        <% if c.charities_cases.empty? %>
-            <tr>
-                <td> <%= c.name %></td>
-                <td><%= link_to 'Show', c %></td>
-                        <td><%= link_to 'Edit', edit_case_path(c) %></td>
-                        <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                         <td><%= button_to 'Protect Case', protect_case_path , method: :post , params: {id: c.id}  %></td>
-            </tr>
-        <%end%>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+      <div style="text-align: center;"> 
+      <h3>Unverified Cases </h3> 
+      </div>
 
-<br>
+      	<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>
+													#
+												</th>
+												<th>
+													Case Name
+												</th>
+												<th>
+													Protect Case
+												</th>
+												<th>
+													Show Case
+												</th>
+                        <th>
+													Edit Case
+												</th>
+                        <th>
+													Delete Case
+												</th>
+											</tr>
+										</thead>
+                    <%count = 1%>
 
-<%= link_to 'New Case', new_case_path %>
+                <% @cases.each do |c| %>
+                 <% if c.charities_cases.empty? %>
+            
+								
+										<tbody>
+											<tr>
+												<td>
+													<%= count %>
+												</td>
+												<td>
+													<%=c.name%>
+												</td>
+                        <td>
+													<%= button_to 'Protect Case', protect_case_path , method: :post , params: {id: c.id} ,:class => "btn btn-success" %>
+												</td>
+												<td>
+													<%= link_to 'Show', c ,:class => "btn btn-dark"%>
+												</td>
+                        	<td>
+													<%= link_to 'Edit', edit_case_path(c) ,:class => "btn btn-dark" %>
+												</td>
+												<td>
+													<%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %>
+												</td>
+											</tr>
+                      <% count+=1 %>
+										
+									
+       
+                <%end%>
+            <% end %>
+        	</tbody>
+				</table>
+      </tbody>
+    </table>
 
-<% else %>
+    <br>
+    <div style="text-align: center;">
+	    <%= link_to 'Home', cases_path , :class => "btn" %> |
+        <%= link_to 'New Case', new_case_path, :class => "btn" %>
 
-<div> You're not authorized to view this page </div>
+     </div>
+        <% else %>
+        <div> You're not authorized to view this page </div>
+        <% end %>
 
-<% end %>
+  </div>
+</div>

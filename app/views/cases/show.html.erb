@@ -1,3 +1,6 @@
+<div class="container">
+<div class="row">
+
 <p id="notice"><%= notice %></p>
 
 <%
@@ -14,45 +17,107 @@ def cutter (x)
 end
 %>
 
-<%if !charity_signed_in?%>
-<%= cutter(@case.name)%>
-<% else %>
-<%= @case.name%>
-<% end %>
+<%
+def percentage(needed, obtained)
+	if(needed > obtained)
+	result = (obtained.to_f / needed) * 100
+	
+	return result.to_s + "%"
+	else
+	return 100.to_s + "%"
+	end
+end
+%>
 
-<%= @case.id%>
+
+	<section class="section section-no-border background-color-light m-none">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+
+							<div class="custom-box-details background-color-light custom-box-shadow-1 col-md-6 ml-xlg mb-xlg pull-right clearfix">
+								<h4>Case Details</h4>
+								<div class="col-md-6 col-sm-6 p-none">
+									<ul class="custom-list-style-1 p-none">
+										<li>
+											<span class="text-color-dark">Job:</span>
+											<span class="custom-text-color-2"><%= @case.job%></span>
+										</li>
+										<li>
+											<span class="text-color-dark">Marital:</span>
+											<span class="custom-text-color-2"><%= @case.marital_status%></span>
+										</li>
+										<li>
+											<span class="text-color-dark">No. of children:</span>
+											<span class="custom-text-color-2"><%= @case.children_num%></span>
+										</li>
+                                        <li>
+											<span class="text-color-dark">Priority:</span>
+											<span class="custom-text-color-2">
+                                                <% (1..@case.priority).each do |i|%>
+                                                  <span class="fa fa-star checked" style="color: red;"></span>
+                                                <%end%>
+                                            
+                                            </span>
+										</li>
+									</ul>
+								</div>
+                                <%if charity_signed_in?%>                       
+								<div class="col-md-6 col-sm-6 p-none">
+									<ul class="custom-list-style-1 p-none">
+										<li>
+											<span class="text-color-dark">City:</span>
+											<span class="custom-text-color-2">
+                                            <%= City.find(@case.city_id).name_en%></span>
+										</li>
+										<li>
+											<span class="text-color-dark">PHONE:</span>
+											<span class="custom-text-color-2"><%= @case.phone%></span>
+										</li>
+										<li>
+											<span class="text-color-dark">EMAIL:</span>
+											<span class="custom-text-color-2">
+                                            <%= @case.email  %>   
+                                            </span>
+										</li>
+									</ul>
+								</div>
+                                <%end%>
+							</div>
+
+							<h2 class="text-color-quaternary font-weight-extra-bold text-uppercase"><%if !charity_signed_in?%>
+                                <%= cutter(@case.name)%>
+                                <% else %>
+                                <%= @case.name%>
+                                <% end %>
+                            </h2>
+
+							<p class="custom-text-color-2"><%= @case.description%></p>
+						</div>
+					</div>
+				</div>
+			</section>
 
 
-
-<%#
-=begin%>
- <%#= button_to 'Donate to case' , checkout_create_path , method: :post , params: {id: @case.id} ,remote: true %>
-<%#
-=end%>
 
 <% if @case.amount_needed >= @case.amount_obtained%>
 
-    <table>
-    <tr>
-        <th>  Needed </th>
-        <th> Received</th>
-        <th> Remaining</th>
-    </tr>
+    <div style="text-align: center;">
+    
+        <div class="progress" class="d-flex justify-content-center">
+            <div class="progress-bar progress-bar-tertiary" data-appear-progress-animation=<%= percentage(@case.amount_needed,@case.amount_obtained) %> data-appear-animation-delay="600" style="width: 75%;">
+                <span class="progress-bar-tooltip" style="opacity: .3;"><%= percentage(@case.amount_needed,@case.amount_obtained) %></span>
+            </div>
+        </div>
+    
+        <%= form_with(url: checkout_create_path, method: "post" , remote: true ) do %>
+        <%= hidden_field_tag(:id, @case.id) %>
+        <%= label_tag(:amount, "Amount") %>
+        <%= text_field_tag(:amount) %>
+        <%= submit_tag("Donate To Case" ,:class => "btn btn-success" )  %>
+        <% end %>
 
-    <tr>
-        <td><%=  @case.amount_needed  %></td>
-        <td><%=  @case.amount_obtained   %></td>
-        <td><%=  @case.amount_needed - @case.amount_obtained   %></td>
-    </tr>
-    </table>
-
-    <%= form_with(url: checkout_create_path, method: "post" , remote: true ) do %>
-    <%= hidden_field_tag(:id, @case.id) %>
-    <%= label_tag(:amount, "Amount") %>
-    <%= text_field_tag(:amount) %>
-    <%= submit_tag("Donate To Case") %>
-    <% end %>
-
+    </div>
 <% end %>
 
 
@@ -72,37 +137,43 @@ end
 
 <%if charity_signed_in?%>
 <% if !current_charity.cases.empty? %>
-    <% if !current_charity.cases.where(id: @case.id).last.donors_cases.empty? %>
-        <% if !current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor.nil? %>
+    <% if !current_charity.cases.where(id: @case.id).empty? %>
+        <% if !current_charity.cases.where(id: @case.id).last.donors_cases.empty? %>
+            <% if !current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor.nil? %>
 
-            <div> Donor Requested_id : </div>
-            <%= current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
+                <div> Donor Requested_id : </div>
+                <%= current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id %>
 
-                <div> Donor Request State : </div>
-            <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %>
+                    <div> Donor Request State : </div>
+                <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %>
 
 
 
-            <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
+                <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
 
-            <%= f.fields_for :donors_cases do |d| %>
+                <%= f.fields_for :donors_cases do |d| %>
 
-                <%= d.select :state, ["approved","rejected"]%>
-                <%= d.submit "Submit" %>
+                    <%= d.select :state, ["approved","rejected"]%>
+                    <%= d.submit "Submit" %>
+                    <% end %>
                 <% end %>
             <% end %>
+         <% end %>
         <% end %>
-   <% end %>
-<% end %>
-
 
 <% end %>
 
 
- <%if charity_signed_in?%>
-    <%if !current_charity.charities_cases.where(case_id: @case.id).last.nil? %>
-        <%= link_to 'Edit', edit_case_path(@case) %> |
-    <% end %>
 <% end %>
 
-<%= link_to 'Back', cases_path %>
+      <div style="text-align: center;">
+            <%if charity_signed_in?%>
+                <%if !current_charity.charities_cases.where(case_id: @case.id).last.nil? %>
+                    <%= link_to 'Edit', edit_case_path(@case) , :class => "btn" %> |
+                <% end %>
+            <% end %>
+
+            <%= link_to 'Back', cases_path , :class => "btn" %>
+      </div>
+    </div>
+</div>
