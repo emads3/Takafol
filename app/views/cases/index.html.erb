@@ -41,10 +41,15 @@ end
 <%= render :partial => "home/case", :collection => @cases, :as => :c %>
   </div>
 
-  <%= paginate @cases %>
+  
 
 </div>
+<div class="row">
+<%= paginate @cases %>
+</div>
 <br>
+
+
 
 <%= link_to 'New Case', new_case_path %>
 

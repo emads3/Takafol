@@ -5,7 +5,7 @@ class Case < ApplicationRecord
     require 'carrierwave/orm/activerecord'
     mount_uploader :NID_img, NidUploader
     attr_accessor :perform_image_validation
-    paginates_per 25
+    paginates_per 3
     validates :name , presence: true ,  format: { with: /\A[a-z\s]+\Z/i, message:  "Name must only contain letters." }
     validates :job , presence: true ,  format: { with: /\A[a-z\s]+\Z/i, message:  "Job must only contain letters." }
     validates :email, email_format: { message: 'Invalid email format' } , confirmation: true
