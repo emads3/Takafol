@@ -10,24 +10,24 @@ class CasesController < ApplicationController
     @governorates = Governorate.all
     # @cases =Case.all.page params[:page]
   end
-  
+
   #Free Cases Index
   def freeindex
     @cases = Case.all.order(priority: :desc)
   end
-  
+
   #Profile
   def profile
     @cases = Case.all
     render 'profile'
   end
-  
+
   # GET /cases/1
   # GET /cases/1.json
   def show
     @case= Case.find(params["id"])
   end
-  
+
   # Add Case to Donor
   def protect
     @case = Case.find(params["id"])
@@ -37,14 +37,14 @@ class CasesController < ApplicationController
     @case.donors_cases.update(state: "pending" )
     redirect_to case_path(@case)
   end
-  
+
   #Remove Donor's Protection
   def remove
     id = current_donor.id
     @case = Case.find(params["id"])
     @case = @case.donors_cases.where(donor_id = "#{id}").first.update(state: "cancelled")
     redirect_to cases_path
-    
+
   end
 
 
@@ -70,29 +70,29 @@ class CasesController < ApplicationController
     @case.charities_cases.update(state: "protected" )
     redirect_to :free_cases
   end
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   # GET /cases/new
   def new
     @case = Case.new
   end
-  
+
   # GET /cases/1/edit
   def edit
   end
-  
+
   # POST /cases
   # POST /cases.json
   def create
-    
+
     #If a Charity is signed in the case will be assigned to it automatically
     if current_charity
       @case = @current_charity.cases.create(case_params_charity)
-      @case.perform_image_validation = false 
+      @case.perform_image_validation = false
       respond_to do |format|
         if @case.save
           format.html { redirect_to @case, notice: 'Case was successfully created.' }
@@ -103,12 +103,12 @@ class CasesController < ApplicationController
           format.json { render json: @case.errors, status: :unprocessable_entity }
         end
       end
-      
+
     else
-      
+
       @case = Case.new(case_params)
-      @case.perform_image_validation = true 
-      
+      @case.perform_image_validation = true
+
       respond_to do |format|
         if @case.save
           format.html { redirect_to @case, notice: 'Case was successfully created.' }
@@ -119,9 +119,9 @@ class CasesController < ApplicationController
         end
       end
     end
-    
+
   end
-  
+
   # PATCH/PUT /cases/1
   # PATCH/PUT /cases/1.json
   def update
@@ -135,7 +135,7 @@ class CasesController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /cases/1
   # DELETE /cases/1.json
   def destroy
@@ -145,8 +145,8 @@ class CasesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  
+
+
   def loggedCharity_cases
     id = current_charity.id
     @cases = Case.all.where(charity_id = "#{id}")
@@ -154,35 +154,37 @@ class CasesController < ApplicationController
 
   def logged_donor_cases
     id = current_donor.id
+    # TODO: fixme: error in selecting, wrong results
     @cases = Case.all.where(id:(DonorsCase.all.where(donor_id:"#{id}", state:"approved")))
   end
 
   def logged_donor_pending_cases
     id = current_donor.id
-    @cases = Case.all.where(id:(DonorsCase.all.where(donor_id:"#{id}", state:"pending")))
+    @cases = @case.donors_cases.where(donor_id = "#{id}") # todo: bing params here
+    # @cases = Case.all.where(id:(DonorsCase.all.where(donor_id:"#{id}", state:"pending")))
   end
   #Search Button
   def search
     search = params[:search].present? ? params[:search] : nil
-  
+
     @cases =
     if search
       Case.where(job: search)
     end
-  
+
   end
-  
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_case
     @case = Case.find(params[:id])
   end
-  
+
   # Only allow a list of trusted parameters through.
   def case_params
     params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :NID_img, :description, :city_id)
   end
-  
+
   #Charity's Special Params to add Case
   def case_params_charity
     params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed, :city_id)
