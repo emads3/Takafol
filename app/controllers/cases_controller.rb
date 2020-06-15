@@ -166,8 +166,12 @@ class CasesController < ApplicationController
   end
 
   def logged_donor_pending_cases
-    @cases = Case.joins(:donors_cases).joins(:donors)
-                 .where("donors_cases.state = ? and donors_cases.donor_id = ?", 'pending', current_donor.id)
+    if donor_signed_in?
+      @cases = Case.joins(:donors_cases).joins(:donors)
+                   .where("donors_cases.state = ? and donors_cases.donor_id = ?", 'pending', current_donor.id)
+    else
+      redirect_to root_path
+    end
   end
   #Search Button
   def search
