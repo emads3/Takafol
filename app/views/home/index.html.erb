@@ -81,12 +81,10 @@
 </section>
 
 
-
-        <%= render 'case' %>
-
-
-      <%# khaled's original page conent, TODO: move it to the appropriate page %>
-
-
+<div class="container">
+  <div class=row>
+<%= render :partial => "case", :collection => @cases.limit(8), :as => :c %>
+  </div>
+</div>
 
 <% end %>
