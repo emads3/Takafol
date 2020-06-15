@@ -8,6 +8,7 @@ class CasesController < ApplicationController
   def index
     @cases = Case.all.order(priority: :desc)
     @governorates = Governorate.all
+    @cities = City.all
     # @cases =Case.all.page params[:page]
   end
 
@@ -190,6 +191,21 @@ class CasesController < ApplicationController
     end
 
   end
+
+
+  #Filter by address
+  def filter
+    city = params[:city_id].present? ? params[:city_id] : nil
+
+    if city
+      @cases = Case.where(city_id: city)
+    else
+    @cases
+    end
+  
+  end
+    
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

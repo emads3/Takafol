@@ -9,6 +9,16 @@
   <%= submit_tag("Search") %>
 <% end %>
 
+<%= form_with(url: "filtered/:q" , method: "get" , local: true )  do %>
+  <%= label_tag(:q, "Filter by address:") %>
+    <select name='city_id' id="addresses" >
+        <% @cities.each do |city| %>
+          <option value=<%=city.id%>><%= city.name_en %></option>
+        <% end %>
+    </select> 
+ <%= submit_tag("Filter") %>
+<% end %>
+
 <%
 def cutter (x)
      i=0
