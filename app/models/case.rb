@@ -1,4 +1,7 @@
 class Case < ApplicationRecord
+
+    scope :verified, -> { joins(:charities_cases).joins(:charities).where("charities_cases.state = 'approved'") }
+
     require 'carrierwave/orm/activerecord'
     mount_uploader :NID_img, NidUploader
     attr_accessor :perform_image_validation
