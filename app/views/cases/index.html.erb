@@ -40,6 +40,9 @@ end
   <div class=row>
 <%= render :partial => "home/case", :collection => @cases, :as => :c %>
   </div>
+
+  <%= paginate @cases %>
+
 </div>
 <br>
 
