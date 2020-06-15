@@ -50,7 +50,12 @@ class CasesController < ApplicationController
   def remove
     id = current_donor.id
     @case = Case.find(params["id"])
-    @case = @case.donors_cases.where(donor_id = "#{id}").first.update(state: "cancelled")
+    @case.donors_cases.where(donor_id = "#{id}").first.update(state: "cancelled")
+    if @case.donors_cases.where(donor_id = "#{id}").first.state == "cancelled"
+      logger.info 'yessssssss i entered the if block'
+
+      @case.charities_cases.last.update(state: "protected")
+    end
     redirect_to cases_path
 
   end
@@ -167,7 +172,7 @@ class CasesController < ApplicationController
     # TODO: fixme: error in selecting, wrong results
     # @cases = Case.all.where(id:(Case.all.where(donor_id:"#{id}", state:"approved")))
     # @cases =Case.all.where() Donor.find(id).donors_cases.where(state: "approved")
-    current_donor_set = Donor.find(26).donors_cases.where(state: "approved").map{|i| i.case_id}
+    current_donor_set = Donor.find(id).donors_cases.where(state: "approved").map{|i| i.case_id}
 
     @cases =Case.where(id: current_donor_set)
 
