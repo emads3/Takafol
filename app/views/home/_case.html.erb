@@ -18,75 +18,71 @@
 </li> %>
 
 <%
-def cutter (x)
-     i=0
-    counter=x.split.count
-    $a=[]
-    while i < counter  do
-        $y=x.split(' ')[i][0].capitalize
-        i +=1
-        $a.push($y)
-     end
-     $a.join(".")
-end
+  def cutter (x)
+    i = 0
+    counter = x.split.count
+    $a = []
+    while i < counter do
+      $y = x.split(' ')[i][0].capitalize
+      i += 1
+      $a.push($y)
+    end
+    $a.join(".")
+  end
 %>
 
 <%
-def percentage(needed, obtained)
-	if(needed > obtained)
-	result = (obtained.to_f / needed) * 100
-	
-	return result.to_s + "%"
-	else
-	return 100.to_s + "%"
-	end
-end
+  def percentage(needed, obtained)
+    if (needed > obtained)
+      result = (obtained.to_f / needed) * 100
+
+      return result.to_s + "%"
+    else
+      return 100.to_s + "%"
+    end
+  end
 %>
 
 
 
 
 <div class="container">
-	<div class=row>
-		<% Case.all.each do |c| %>
-	<% if  !c.charities.empty? || !c.donors.empty? %>
-        <% if c.charities_cases.last.state == "protected" && c.amount_needed >= c.amount_obtained%>
-		<div class="col-md-4 appear-animation animated fadeInRight appear-animation-visible" data-appear-animation="fadeInRight" data-appear-animation-delay="0" data-appear-animation-duration="1s">
-			<div class="featured-box featured-box-quaternary mt-sm" style="height: 377px;">
-				<div class="box-content">
-					<div class="row">
-						<div class="col-md-12">
-							<%# <i class="icon-featured fa fa-cogs m-none"></i> %>
-							<%if !charity_signed_in?%>
-							<h2 class="mb-lg"><%= cutter(c.name)%></h2>
-							<% else %>
-							<h2 class="mb-lg"><%= c.name%></h2>
-							<% end %>
-							<h6 class="mb-lg">Job: <%= c.job %></h6>
-							<h6 class="mb-lg">Children: <%= c.children_num%></h6>
-							<hr>
-							<p><%= c.description.truncate(40) %></p>
-							<h6 class="mb-lg">This month donations:</h6>
-							<div class="progress">
-								<div class="progress-bar progress-bar-tertiary" data-appear-progress-animation=<%= percentage(c.amount_needed,c.amount_obtained) %> data-appear-animation-delay="600" style="width: 75%;">
-									<span class="progress-bar-tooltip" style="opacity: .3;"><%= percentage(c.amount_needed,c.amount_obtained) %></span>
-								</div>
-							</div>
+  <div class=row>
+    <% @cases.each do |c| %>
+      <div class="col-md-4 appear-animation animated fadeInRight appear-animation-visible" data-appear-animation="fadeInRight" data-appear-animation-delay="0" data-appear-animation-duration="1s">
+        <div class="featured-box featured-box-quaternary mt-sm" style="height: 377px;">
+          <div class="box-content">
+            <div class="row">
+              <div class="col-md-12">
+                <%# <i class="icon-featured fa fa-cogs m-none"></i> %>
+                <% if !charity_signed_in? %>
+                  <h2 class="mb-lg"><%= cutter(c.name) %></h2>
+                <% else %>
+                  <h2 class="mb-lg"><%= c.name %></h2>
+                <% end %>
+                <h6 class="mb-lg">Job: <%= c.job %></h6>
+                <h6 class="mb-lg">Children: <%= c.children_num %></h6>
+                <hr>
+                <p><%= c.description.truncate(40) %></p>
+                <h6 class="mb-lg">This month donations:</h6>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-tertiary" data-appear-progress-animation=<%= percentage(c.amount_needed, c.amount_obtained) %> data-appear-animation-delay="600" style="width: 75%;">
+                    <span class="progress-bar-tooltip" style="opacity: .3;"><%= percentage(c.amount_needed, c.amount_obtained) %></span>
+                  </div>
+                </div>
 
-									<div class="divider divider-small divider-small-center">
-										<hr>
-									</div>
-									<a class="btn btn-success mr-xs mb-lg" type="button" href=<%= case_path(c) %>>Donate</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<%end%>
-			<%end%>
-		<%end%>
+                <div class="divider divider-small divider-small-center">
+                  <hr>
+                </div>
+                <a class="btn btn-success mr-xs mb-lg" type="button" href=<%= case_path(c) %>>Donate</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
 
-	</div>
+  </div>
 </div>
 
 
