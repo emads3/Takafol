@@ -6,7 +6,7 @@ class CasesController < ApplicationController
   # GET /cases
   # GET /cases.json
   def index
-    @cases = Case.verified.page params[:page]
+    @cases = Case.where("amount_needed > #{:amount_obtained}" ).verified.page params[:page]
     @governorates = Governorate.all
     @cities = City.all
     # @cases =Case.all.page params[:page]
