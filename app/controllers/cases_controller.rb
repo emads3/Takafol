@@ -25,7 +25,14 @@ class CasesController < ApplicationController
   # GET /cases/1
   # GET /cases/1.json
   def show
-    @case= Case.find(params["id"])
+    c = Case.find(params["id"])
+    if c.charities_cases.count > 0 || charity_signed_in?
+      logger.info 'yessssssss i entered the if block -==================/\/\/\/\/\/'
+      @case = c
+    else
+      logger.info 'NOOOO i entered the if block -==================/\/\/\/\/\/'
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # Add Case to Donor
