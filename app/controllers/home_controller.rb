@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @cases = Case.verified.joins(:donors_cases).joins(:donors)
-                 .where("donors_cases.state = 'pending' or donors_cases.state = 'cancelled'")
+    @cases = Case.verified.left_outer_joins(:donors_cases).joins(:donors).where("donors_cases.state != 'protected'")
   end
 end
