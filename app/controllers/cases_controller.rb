@@ -166,9 +166,8 @@ class CasesController < ApplicationController
   end
 
   def logged_donor_pending_cases
-    id = current_donor.id
-    @cases = @case.donors_cases.where(donor_id = "#{id}") # todo: bing params here
-    # @cases = Case.all.where(id:(DonorsCase.all.where(donor_id:"#{id}", state:"pending")))
+    @cases = Case.joins(:donors_cases).joins(:donors)
+                 .where("donors_cases.state = ? and donors_cases.donor_id = ?", 'pending', current_donor.id)
   end
   #Search Button
   def search
