@@ -49,7 +49,12 @@ class CasesController < ApplicationController
   def remove
     id = current_donor.id
     @case = Case.find(params["id"])
-    @case = @case.donors_cases.where(donor_id = "#{id}").first.update(state: "cancelled")
+    @case.donors_cases.where(donor_id = "#{id}").first.update(state: "cancelled")
+    if @case.donors_cases.where(donor_id = "#{id}").first.state == "cancelled"
+      logger.info 'yessssssss i entered the if block'
+
+      @case.charities_cases.last.update(state: "protected")
+    end
     redirect_to cases_path
 
   end
