@@ -171,7 +171,7 @@ class CasesController < ApplicationController
     # TODO: fixme: error in selecting, wrong results
     # @cases = Case.all.where(id:(Case.all.where(donor_id:"#{id}", state:"approved")))
     # @cases =Case.all.where() Donor.find(id).donors_cases.where(state: "approved")
-    current_donor_set = Donor.find(26).donors_cases.where(state: "approved").map{|i| i.case_id}
+    current_donor_set = Donor.find(id).donors_cases.where(state: "approved").map{|i| i.case_id}
 
     @cases =Case.where(id: current_donor_set)
 
