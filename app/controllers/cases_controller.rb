@@ -61,10 +61,12 @@ class CasesController < ApplicationController
     @id = params["id"].to_i
     @case =Case.find(@id)
     @case.donors_cases.last.update(state: params["case"]["donors_cases"]["state"])
-    if @case.donors_cases.last.update(state: params["case"]["donors_cases"]["state"])=="approved"
+    if @case.donors_cases.last.state =="approved"
+      logger.info 'yessssssss i entered the if block'
+
       @case.charities_cases.last.update(state: "released")
     end
-    redirect_to case_path(@case)
+    redirect_to cases_path
     # redirect_to hi
     # render plain("hiiii")
 
@@ -162,7 +164,12 @@ class CasesController < ApplicationController
   def logged_donor_cases
     id = current_donor.id
     # TODO: fixme: error in selecting, wrong results
-    @cases = Case.all.where(id:(DonorsCase.all.where(donor_id:"#{id}", state:"approved")))
+    # @cases = Case.all.where(id:(Case.all.where(donor_id:"#{id}", state:"approved")))
+    # @cases =Case.all.where() Donor.find(id).donors_cases.where(state: "approved")
+    current_donor_set = Donor.find(26).donors_cases.where(state: "approved").map{|i| i.case_id}
+
+    @cases =Case.where(id: current_donor_set)
+
   end
 
   def logged_donor_pending_cases
