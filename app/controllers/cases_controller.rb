@@ -6,7 +6,7 @@ class CasesController < ApplicationController
   # GET /cases
   # GET /cases.json
   def index
-    @cases = Case.all.order(priority: :desc)
+    @cases = Case.verified.page params[:page]
     @governorates = Governorate.all
     @cities = City.all
     # @cases =Case.all.page params[:page]
