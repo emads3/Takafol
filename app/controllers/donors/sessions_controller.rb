@@ -18,7 +18,7 @@ class Donors::SessionsController < Devise::SessionsController
   #   super
   # end
     def after_sign_in_path_for(donor)
-      donor_cases_path	
+      cases_path
     end
 
   # protected
