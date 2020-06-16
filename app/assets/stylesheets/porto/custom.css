@@ -160,3 +160,31 @@ align-items: center;
     -moz-appearance: none;
     appearance: none;
 }
+
+a:hover {
+    color: #47a447;
+}
+
+a {
+    color: #282828;
+}
+
+html body .tabs .nav-tabs li.active a{
+border-top-color: #47a447;
+color: #47a447;
+}
+
+html body .tabs .nav-tabs a{
+    color: #282828;
+}
+
+html body .tabs .nav-tabs a:hover{
+    border-top-color: #282828;
+
+}
+
+html body .tabs .nav-tabs a:hover{
+    color: #47a447;
+
+
+}
