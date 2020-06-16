@@ -146,56 +146,63 @@ end
 
 
 
-<%
-=begin%>
- <%if donor_signed_in? && !charity_signed_in?%>
-    <% if !current_donor.donors_cases.where(:case_id => @case.id).any? ||
-      current_donor.donors_cases.where(:case_id => @case.id).last.state == "cancelled"  %>
 
-         <%= button_to 'Request Case Protection', donor_protect_path , method: :post , params: {id: @case.id}  , :class => "btn btn-primary"%>
-    <% else %>
-        <p> <strong> Case Requested </strong> </p>
-        <%= button_to 'Remove Case Protection', donor_cancel_path , method: :post , params: {id: @case.id} , :class => "btn btn-danger" %>
-    <% end %>
 
-<%else%>
-    <%= button_to 'Request Case Protection', new_donor_session_path , :class => "btn btn-primary" %>
-
-<% end %> 
-<%
-=end%>
-
+<section class="call-to-action mb-xl">
+								<div class="call-to-action-content" style="text-align:left">
 
 <%if charity_signed_in?%>
-<% if !current_charity.cases.empty? %>
-    <% if !current_charity.cases.where(id: @case.id).empty? %>
-        <% if !current_charity.cases.where(id: @case.id).last.donors_cases.empty? %>
-            <%if !current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").empty? %>
- 
-                    <div> Donor Requested Name : </div>
-                    <span> <strong> <%= Donor.find(current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id).name %> </strong> </span>
-
-                        <div> Donor Request State : </div>
-                    <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %>
+    <% if !current_charity.cases.empty? %>
+        <% if !current_charity.cases.where(id: @case.id).empty? %>
+            <% if !current_charity.cases.where(id: @case.id).last.donors_cases.empty? %>
+                <%if !current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").empty? %>
 
 
 
-                    <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
+
+				<h3>Requested Donor Name : <strong> <%= Donor.find(current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id).name %> </strong></h3> 
+                <h5>Address: <strong><%= Donor.find(current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id).address ? Donor.find(current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id).address : "Undefined" %><strong></h5>
+				<h5>Phone Number: <strong><%= Donor.find(current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id).phone ? Donor.find(current_charity.cases.where(id: @case.id).last.donors_cases.where(state: "pending").last.donor_id).phone : "Undefined" %></strong> </h5>
+                <p>Request State : <%= current_charity.cases.where(id: @case.id).last.donors_cases.last.state %></p>
+								</div>
+
+
+
+ <%= form_for @case, :url => "updatestate/"+@case.id.to_s , :html => {:method => :put} do |f| %>
                     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
                     <%= f.fields_for :donors_cases do |d| %>
-                        <%= d.select :state, ["approved","rejected"]%>
-                        <%= d.submit "Submit" %>
+                        <%= d.select :state, ["approved","rejected"], {}, { :class => 'custom-select' , :style =>'margin-left:3%'} %>
+
+								<div class="call-to-action-btn">
+
+                        <%= d.submit "Submit", class: "btn btn-quaternary btn-lg"%>
+
+                                                        </div>
+
                         <% end %>
+
+								
+                                
+                    <% end %>            
+                                
+                                
                     <% end %>
-                <% end %>
          <% end %>
         <% end %>
 
 <% end %>
 
 
-<% end %>
+<% end %>  
+
+</section>
+
+
+
+                   
+                    
+                
 
       <div style="text-align: center;">
             <%if charity_signed_in?%>
