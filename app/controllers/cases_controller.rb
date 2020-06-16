@@ -168,6 +168,13 @@ class CasesController < ApplicationController
     @cases =Case.where(id: current_charity_set).page params[:page]
   end
 
+  def logged_charity_pending_cases
+    id = current_charity.id
+    @cases = Case.joins(:donors_cases).joins(:donors).where("donors_cases.state = 'pending'").joins(:charities_cases).joins(:charities).where("charities.id = #{id}").page params[:page]
+
+
+  end
+
   def logged_donor_cases
     id = current_donor.id
     # TODO: fixme: error in selecting, wrong results
