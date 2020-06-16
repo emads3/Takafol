@@ -13,7 +13,7 @@ class Case < ApplicationRecord
     validates :NID_img , presence:  {message:  "you have to upload a National Id image" } , if: :perform_image_validation
     validates :children_num, :inclusion => { :in => 0..8 }
     validates :marital_status , presence: true
-    validates :phone, format: { with: /\A[+-]?\d+\z/ , message:  "Phone must only contain Numbers." } , uniqueness: true
+    validates :phone, format: { with: /\A[+-]?\d+\z/ , message:  "Phone must only contain Numbers." } , uniqueness: false
     validates :priority, :inclusion => { :in => 1..5 } , allow_nil: true
 
 
