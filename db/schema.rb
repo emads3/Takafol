@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_033951) do
     t.string "national_id", null: false
     t.string "national_id_img"
     t.text "address"
+    t.text "phone"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
