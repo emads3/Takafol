@@ -126,7 +126,7 @@ class CasesController < ApplicationController
 
       respond_to do |format|
         if @case.save
-          format.html { redirect_to @case, notice: 'Case was successfully created.' }
+          format.html { redirect_to new_case_path, notice: 'Your data was received and we will get back to you soon.' }
           format.json { render :show, status: :created, location: @case }
         else
           format.html { render :new }
@@ -207,9 +207,9 @@ class CasesController < ApplicationController
     else
     @cases
     end
-  
+
   end
-    
+
 
 
   private
