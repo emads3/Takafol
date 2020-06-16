@@ -51,7 +51,7 @@
     <% @cases.each do |c| %>
     <tr>
         <td> <%= c.name %></td>
-        <td><%= link_to 'Show', c , :class => "btn btn-quaternary mr-xs mb-sm" %> </td><%=debug c%>
+        <td><%= link_to 'Show', c , :class => "btn btn-quaternary mr-xs mb-sm" %> </td>
         <td><%= button_to 'Cancel request', donor_cancel_path , method: :post , params: {id: c.id} , :class => "btn btn-danger" %></td>
     </tr>
     <% end %>
@@ -60,7 +60,10 @@
   </tbody>
 </table>
 
+ <div class="row">
 
+<%= paginate @cases %>
+</div>
 					
 				</div>
 
