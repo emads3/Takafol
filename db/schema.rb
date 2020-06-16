@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_033951) do
     t.string "email"
     t.integer "priority"
     t.string "phone"
+    t.string "address"
     t.string "national_id", null: false
     t.string "NID_img"
     t.decimal "amount_needed", precision: 10, default: "500"
