@@ -72,7 +72,7 @@
           <div class="col-md-3 col-sm-6">
             <div class="counter">
               <strong data-to=<%= DonorsCase.all.count %>>178</strong>
-              <label>Adapted Cases</label>
+              <label>Adopted Cases</label>
             </div>
           </div>
         </div>
@@ -101,16 +101,21 @@
 
   <div class="container">
     <div class="row">
-      <%= render :partial => "case", :collection => @cases.limit(8), :as => :c %>
+      <%= render :partial => "case", :collection => @cases.limit(6), :as => :c %>
       <% if @cases.empty? %>
         <div class="alert alert-warning center" role="alert">
           No cases in the system yet..
         </div>
       <% end %>
+	  <div class="col-md-12" style="text-align: end;">
+		<%= link_to "Show more", cases_path, :class =>"btn btn-lg btn-borders btn-success ml-xl"%>
+		</div>
     </div>
   </div>
 
 <% end %>
+
+
 
 <div class="row" style="text-align:center">
 								<h1 class="mt-xl"><span style="color:#47a447">Donate</span> now and join our family!</h1>
