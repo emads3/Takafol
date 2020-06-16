@@ -127,6 +127,7 @@ class CasesController < ApplicationController
 
       respond_to do |format|
         if @case.save
+          flash[:city_id] = @case.city_id
           format.html { redirect_to new_case_path, notice: 'Your data was received and we will get back to you soon.' }
           format.json { render :show, status: :created, location: @case }
         else
