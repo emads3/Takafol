@@ -1,3 +1,18 @@
+<section class="section section-default section-default-scale-8">
+  <div class="container">
+    <div class="row">
+      <div class="counters counters-text-light">
+        <div class="col-md-12 col-sm-12">
+          <div class="counter">
+            <strong data-to=<%= @charity.charities_cases.where('state in("protected", "released")').count %> data-append="+">1000+</strong>
+            <label>Verified Cases with <%= @charity.name %></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="container">
   <div class="row">
     <div class="col-md-9">
