@@ -56,7 +56,13 @@ end
 											<span class="text-color-dark">Priority:</span>
 											<span class="custom-text-color-2">
                                                 <% (1..@case.priority).each do |i|%>
-                                                  <span class="fa fa-star checked" style="color: red;"></span>
+                                                   <span class="dot" style="height: 12px;
+                                                            width: 12px;
+                                                            background-color: red;
+                                                            border-radius: 50%;
+                                                            display: inline-block;">
+                                                    </span>
+
                                                 <%end%>
                                             
                                             </span>
