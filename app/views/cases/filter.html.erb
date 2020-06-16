@@ -1,27 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Cases</h1>
+<section class="call-to-action call-to-action-quaternary mb-xl">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="call-to-action-content">
+									<h3>We know it is a hard time, but everything is going to be all right.</h3>
+									<p>But until it does<strong> we have your back</strong></p>
+								</div>
+								<div class="call-to-action-btn">
+									<%= link_to "Add Case", new_case_path, :class =>"btn btn-lg btn-success"%><span class="arrow-dark hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="top: -12px;"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
+<div class="container">
+<div class="row">
+<div class="col-md-6">
 
-<%= form_with(url: "/search/:q" , method: "get" , local: true )  do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:search) %>
-  <%= submit_tag("Search") %>
-<% end %>
+<% if !params['city_id'].nil? %>
+     <h1> Cases in:<strong> <%= City.find(params['city_id']).name_en %><strong><h1>
+      <% end %>
 
-<%
-=begin%>
- <%= form_with(url: "filtered/:q" , method: "get" , local: true )  do %>
-  <%= label_tag(:q, "Filter by address:") %>
-    <select name='city_id' id="addresses" >
-        <% @cities.each do |city| %>
-          <option value=<%=city.id%>><%= city.name_en %></option>
-        <% end %>
-    </select> 
- <%= submit_tag("Filter") %>
-<% end %> 
-<%
-=end%>
+</div>
+
+</div>
+</div>
 
 <%
 def cutter (x)
@@ -37,78 +43,29 @@ def cutter (x)
 end
 %>
 
-<%
-=begin%>
- <div id="search">
-<label>search by address</label>
-<select name="addresses" id="addresses" form="carform">
-    <% @governorates.each do |governorate| %>
-
-      <option value=<%=governorate.id%>><%= governorate.name_en %></option>
-    <% end %>
-</select>
-
-<div> 
-<%
-=end%>
 
 
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-   <div> Cases that are protected by charities </div>
-
-    <% if !@cases.empty? %>
-    <% @cases.each do |c| %>
-
-     <% if  !c.charities.empty? || !c.donors.empty? %>
-        <% if c.charities_cases.last.state == "protected" && c.amount_needed >= c.amount_obtained%>
-          <tr>
-            <td> <%if !charity_signed_in?%>
-              <%= cutter(c.name)%>
-              <% else %>
-              <%= c.name%>
-              <% end %>
-            </td>
-            <td><%= link_to 'Show', c %></td>
-            <%if charity_signed_in?%>
-              <%if !current_charity.charities_cases.where(case_id: c.id).last.nil? %>
-                <td><%= link_to 'Edit', edit_case_path(c) %></td>
-                <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
-           <% end %>
+<div class="container">
+  <div class='row'>
+<%= render :partial => "home/case", :collection => @cases, :as => :c %>
+  </div>
 
 
-          </tr>
-        <% end %>
-      <% end %>
-    <% end %>
 
-    <% else %>
-    <h3> There is no cases with this address </h3>
-    <% end %>
+</div>
 
-  </tbody>
-</table>
 
+<div class="col-md-12" style="text-align: end;">
+		<%= link_to "All Cases", cases_path, :class =>"btn btn-lg btn-borders btn-success ml-xl"%>
+		</div>
+    </div>
+    
+<div class="row">
+<%= paginate @cases %>
+</div>
 <br>
 
-<%= link_to 'New Case', new_case_path %>
-
-<%if charity_signed_in? || donor_signed_in? %>
-<%= link_to 'Show Profile', profile_path %> |
-<% end %>
-
-
-<%if charity_signed_in? %>
-<%= link_to 'Unprotected Cases', free_cases_path %>
-<% end %>
 
 
 </div>
