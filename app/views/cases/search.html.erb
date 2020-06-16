@@ -2,14 +2,37 @@
 
 <%if !@cases.empty? %>
 
-<h1>Cases</h1>
+<section class="call-to-action call-to-action-quaternary mb-xl">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="call-to-action-content">
+									<h3>We know it is a hard time, but everything is going to be all right.</h3>
+									<p>But until it does<strong> we have your back</strong></p>
+								</div>
+								<div class="call-to-action-btn">
+									<%= link_to "Add Case", new_case_path, :class =>"btn btn-lg btn-success"%><span class="arrow-dark hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="top: -12px;"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+
+<h1>Search Results</h1>
+
+</div>
 
 
-<%= form_with(url: "/search/:q" , method: "get" , local: true )  do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:search) %>
-  <%= submit_tag("Search") %>
-<% end %>
+</div>
+</div>
+
+
+
+
 
 <%
 def cutter (x)
@@ -26,60 +49,36 @@ end
 %>
 
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
+  <div class='row'>
+<%= render :partial => "home/case", :collection => @cases, :as => :c %>
+  </div>
 
-  <tbody>
-   <div> Cases that are protected by charities </div>
 
-    <% @cases.each do |c| %>
 
-     <% if  !c.charities.empty? || !c.donors.empty? %>
-        <% if c.charities_cases.last.state == "protected" && c.amount_needed >= c.amount_obtained%>
-          <tr>
-            <td> <%if !charity_signed_in?%>
-              <%= cutter(c.name)%>
-              <% else %>
-              <%= c.name%>
-              <% end %>
-            </td>
-            <td><%= link_to 'Show', c %></td>
-            <%if charity_signed_in?%>
-              <%if !current_charity.charities_cases.where(case_id: c.id).last.nil? %>
-                <td><%= link_to 'Edit', edit_case_path(c) %></td>
-                <td><%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
-           <% end %>
+</div>
+<div class="row">
+<%= paginate @cases %>
+</div>
+<br>
 
-            
-          </tr>
-        <% end %>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+
+
+</div>
+</div>
 
 <% else %>
 
-<h1> There is no such case with this Job/Address  </h1>
+<div class="container">
 
+	<div class="row">
+		<div class="alert alert-danger">
+		<strong>Oh!</strong> It appears like there is no cases in this area, try another area or  <%= link_to "View all cases", cases_path, :class => "alert-link" %> 
+                       
+		</div>
+	</div>
+</div>
 
 <% end %>
 
 
-
-
-<%= link_to 'New Case', new_case_path %>
-
-<%if charity_signed_in? || donor_signed_in? %>
-<%= link_to 'Show Profile', profile_path %> |
-<% end %>
-
-
-<%if charity_signed_in? %>
-<%= link_to 'Unprotected Cases', free_cases_path %>
-<% end %>
