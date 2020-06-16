@@ -15,7 +15,7 @@
         <% @cities.each do |city| %>
           <option value=<%=city.id%>><%= city.name_en %></option>
         <% end %>
-    </select> 
+    </select>
  <%= submit_tag("Filter") %>
 <% end %>
 
@@ -47,11 +47,11 @@ end
 
 
 <div class="container">
-  <div class=row>
+  <div class='row'>
 <%= render :partial => "home/case", :collection => @cases, :as => :c %>
   </div>
 
-  
+
 
 </div>
 <div class="row">

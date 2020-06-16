@@ -82,7 +82,7 @@
 
 
   <div class="container">
-    <div class=row>
+    <div class="row">
       <%= render :partial => "case", :collection => @cases.limit(8), :as => :c %>
       <% if @cases.empty? %>
         <div class="alert alert-warning center" role="alert">
