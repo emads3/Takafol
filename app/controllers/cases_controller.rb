@@ -49,13 +49,13 @@ class CasesController < ApplicationController
 
   #Remove Donor's Protection
   def remove
+    if current_donor
     id = current_donor.id
     @case = Case.find(params["id"])
     @case.donors_cases.where(donor_id = "#{id}").first.update(state: "cancelled")
     if @case.donors_cases.where(donor_id = "#{id}").first.state == "cancelled"
-      logger.info 'yessssssss i entered the if block'
-
-      @case.charities_cases.last.update(state: "protected")
+       @case.charities_cases.last.update(state: "protected")
+    end
     end
     redirect_to cases_path
 
@@ -165,12 +165,23 @@ class CasesController < ApplicationController
 
 
   def loggedCharity_cases
+    if current_charity
     id = current_charity.id
     current_charity_set = Charity.find(id).charities_cases.where(state: "protected").map{|i| i.case_id}
     @cases =Case.where(id: current_charity_set).page params[:page]
+    end
+  end
+
+  def logged_charity_pending_cases
+    if current_charity
+    id = current_charity.id
+    @cases = Case.joins(:donors_cases).joins(:donors).where("donors_cases.state = 'pending'").joins(:charities_cases).joins(:charities).where("charities.id = #{id}").page params[:page]
+    end
+
   end
 
   def logged_donor_cases
+    if current_donor
     id = current_donor.id
     # TODO: fixme: error in selecting, wrong results
     # @cases = Case.all.where(id:(Case.all.where(donor_id:"#{id}", state:"approved")))
@@ -178,6 +189,7 @@ class CasesController < ApplicationController
     current_donor_set = Donor.find(id).donors_cases.where(state: "approved").map{|i| i.case_id}
 
     @cases =Case.where(id: current_donor_set).page params[:page]
+    end
   end
 
   def logged_donor_pending_cases
@@ -190,7 +202,8 @@ class CasesController < ApplicationController
   #Search Button
   def search
     search = params[:search].present? ? params[:search] : nil
-
+    @governorates = Governorate.all
+    @cities = City.all
     @cases =
     if search
       Case.where(job: search).page params[:page]

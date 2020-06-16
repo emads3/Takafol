@@ -8,24 +8,22 @@
 								<h4 class="heading-primary"></h4>
 								<ul class="nav nav-list mb-xl show-bg-active">
 									<li ><a data-hash data-hash-offset="85" href=<%=profile_path%>>Profile</a></li>
-									<li class="active">
+									<li >
 										<a data-hash data-hash-offset="85" href="">Cases</a>
 										<ul>
 											<li><a data-hash data-hash-offset="85" href=<%=my_cases_path%>>My Cases</a></li>
 											<li><a data-hash data-hash-offset="85" href=<%=free_cases_path%>>Free Cases</a></li>
 										</ul>
 									</li>
-									<li><a data-hash data-hash-offset="85" href=<%=charity_pending_path%>>Donation Requests</a></li>
+									<li class="active"><a data-hash data-hash-offset="85" href=<%=charity_pending_path%>>Donation Requests</a></li>
 								</ul>
 
 							</aside>
 						</div>
 						<div class="col-md-9">
 
-<%= link_to 'New Case', new_case_path, :class => "btn btn-success mr-xs mb-sm" %>
-              <p id="notice"><%= notice %></p>
 
-<h2 class="mb-sm" id="first">My Cases</h2>
+<h2 class="mb-sm" id="first">Pending Donation Requests</h2>
  
 
 <table class="table table-hover">
@@ -43,7 +41,6 @@
          <td> <%= c.name %></td>
         <td><%= link_to 'Show', c, :class => "btn btn-quaternary mr-xs mb-sm" %> </td>
         <td><%= link_to 'Edit', edit_case_path(c) , :class => "btn btn-quaternary mr-xs mb-sm" %> 
-        <td> <%= link_to 'Unverify', c , method: :delete, data: { confirm: 'Are you sure?' } , :class => "btn btn-danger mr-xs mb-sm"%></td>
     </tr>
     <% end %>
     

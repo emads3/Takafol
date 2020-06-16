@@ -7,7 +7,7 @@ class Case < ApplicationRecord
     require 'carrierwave/orm/activerecord'
     mount_uploader :NID_img, NidUploader
     attr_accessor :perform_image_validation
-    paginates_per 3
+    paginates_per 15
     validates :name , presence: true
     validates :job , presence: true
     validates :email, email_format: { message: 'Invalid email format' } , allow_nil: true, uniqueness: false, presence: false

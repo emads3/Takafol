@@ -1,23 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Cases</h1>
+<section class="call-to-action call-to-action-quaternary mb-xl">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="call-to-action-content">
+									<h3>We know it is a hard time, but everything is going to be all right.</h3>
+									<p>But until it does<strong> we have your back</strong></p>
+								</div>
+								<div class="call-to-action-btn">
+									<%= link_to "Add Case", new_case_path, :class =>"btn btn-lg btn-success"%><span class="arrow-dark hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="top: -12px;"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
+<div class="container">
+<div class="row">
+<div class="col-md-6">
 
-<%= form_with(url: "/search/:q" , method: "get" , local: true )  do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:search) %>
-  <%= submit_tag("Search") %>
-<% end %>
+<h1>All Cases</h1>
 
-<%= form_with(url: "filtered/:q" , method: "get" , local: true )  do %>
-  <%= label_tag(:q, "Filter by address:") %>
-    <select name='city_id' id="addresses" >
-        <% @cities.each do |city| %>
-          <option value=<%=city.id%>><%= city.name_en %></option>
-        <% end %>
-    </select>
- <%= submit_tag("Filter") %>
-<% end %>
+</div>
+<div class="col-md-6" style="text-align: end;">
+
+  <%= form_with(url: "filtered/:q" , method: "get" , local: true )  do %>
+    <%= label_tag(:q, "Filter by address:") %>
+      <select name='city_id' id="addresses" class="custom-select" >
+          <% @cities.each do |city| %>
+            <option value=<%=city.id%>><%= city.name_en %></option>
+          <% end %>
+      </select>
+  <%= submit_tag("Filter",:class => "btn btn-quaternary mr-xs") %>
+  <% end %>
+</div>
+
+</div>
+</div>
 
 <%
 def cutter (x)
@@ -33,16 +53,6 @@ def cutter (x)
 end
 %>
 
-<div id="search">
-<label>search by address</label>
-<select name="addresses" id="addresses" form="carform">
-    <% @governorates.each do |governorate| %>
-
-      <option value=<%=governorate.id%>><%= governorate.name_en %></option>
-    <% end %>
-</select>
-
-<div>
 
 
 
@@ -58,15 +68,6 @@ end
 <%= paginate @cases %>
 </div>
 <br>
-
-
-
-<%= link_to 'New Case', new_case_path %>
-
-
-<%if charity_signed_in? %>
-<%= link_to 'Unprotected Cases', free_cases_path %>
-<% end %>
 
 
 </div>
