@@ -19,7 +19,7 @@ class CasesController < ApplicationController
 
   #Profile
   def profile
-    @cases = Case.all
+    @cases = Case.all.page params[:page]
     render 'profile'
   end
 
@@ -164,7 +164,8 @@ class CasesController < ApplicationController
 
   def loggedCharity_cases
     id = current_charity.id
-    @cases = Case.all.where(charity_id = "#{id}")
+    current_charity_set = Charity.find(id).charities_cases.where(state: "protected").map{|i| i.case_id}
+    @cases =Case.where(id: current_charity_set).page params[:page]
   end
 
   def logged_donor_cases
@@ -174,15 +175,13 @@ class CasesController < ApplicationController
     # @cases =Case.all.where() Donor.find(id).donors_cases.where(state: "approved")
     current_donor_set = Donor.find(id).donors_cases.where(state: "approved").map{|i| i.case_id}
 
-    @cases =Case.where(id: current_donor_set)
-
+    @cases =Case.where(id: current_donor_set).page params[:page]
   end
 
   def logged_donor_pending_cases
     if donor_signed_in?
       @cases = Case.joins(:donors_cases).joins(:donors)
-                   .where("donors_cases.state = ? and donors_cases.donor_id = ?", 'pending', current_donor.id)
-    else
+            .where("donors_cases.state = ? and donors_cases.donor_id = ?", 'pending', current_donor.id).page params[:page]    else
       redirect_to root_path
     end
   end
@@ -192,8 +191,8 @@ class CasesController < ApplicationController
 
     @cases =
     if search
-      Case.where(job: search)
-    end
+      Case.where(job: search).page params[:page]
+      end
 
   end
 
@@ -203,9 +202,10 @@ class CasesController < ApplicationController
     city = params[:city_id].present? ? params[:city_id] : nil
 
     if city
-      @cases = Case.where(city_id: city)
-    else
+      @cases = Case.where(city_id: city).page params[:page]
+        else
     @cases
+    @cases.page params[:page]
     end
 
   end

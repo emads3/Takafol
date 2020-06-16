@@ -38,18 +38,24 @@
   <tbody>
    
      
-    <% current_charity.charities_cases.where(state: "protected").each do |c| %>
-    <tr>
-        <td> <%= @cases.find(c.case_id).name %></td>
-        <td><%= link_to 'Show', @cases.find(c.case_id), :class => "btn btn-quaternary mr-xs mb-sm" %> </td>
-        <td><%= link_to 'Edit', edit_case_path(c.case_id) , :class => "btn btn-quaternary mr-xs mb-sm" %> 
-        <td> <%= link_to 'Unverify', @cases.find(c.case_id), method: :delete, data: { confirm: 'Are you sure?' } , :class => "btn btn-danger mr-xs mb-sm"%></td>
+     <% @cases.each do |c| %>
+         <tr>
+         <td> <%= c.name %></td>
+        <td><%= link_to 'Show', c, :class => "btn btn-quaternary mr-xs mb-sm" %> </td>
+        <td><%= link_to 'Edit', edit_case_path(c) , :class => "btn btn-quaternary mr-xs mb-sm" %> 
+        <td> <%= link_to 'Unverify', c , method: :delete, data: { confirm: 'Are you sure?' } , :class => "btn btn-danger mr-xs mb-sm"%></td>
     </tr>
     <% end %>
     
 
   </tbody>
 </table>
+
+
+ <div class="row">
+
+<%= paginate @cases %>
+</div>
 
             
         </div>
