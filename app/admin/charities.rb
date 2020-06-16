@@ -5,7 +5,7 @@ ActiveAdmin.register Charity do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :email, :encrypted_password, :name, :address, :phone_number, :description, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :email, :encrypted_password, :name, :address, :phone_number, :description, :reset_password_token, :reset_password_sent_at, :remember_created_at, :verified
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register Charity do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end

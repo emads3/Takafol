@@ -2,6 +2,7 @@ class CasesController < ApplicationController
   before_action :set_case, only: [:show, :edit, :update, :destroy  ]
   # skip_before_action :verify_authenticity_token
 
+  before_action :check_if_charity_is_verified, only: [:freeindex, :updatestate, :freeprotect]
 
   # GET /cases
   # GET /cases.json
@@ -227,4 +228,13 @@ class CasesController < ApplicationController
   def case_params_charity
     params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed, :city_id, :address)
   end
+
+  def check_if_charity_is_verified
+    if charity_signed_in?
+      if !current_charity.verified?
+        redirect_to root_path, error: 'You are not allowed to access this part of the site'
+      end
+    end
+  end
+
 end
