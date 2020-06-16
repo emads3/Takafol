@@ -1,0 +1,47 @@
+<% content_for :content do %>
+  <%# TODO: add pagination  %>
+  <div class="container">
+    <h1 class="center heading-dark">Charities</h1>
+    <h3 class="heading-middle-border">
+      <% if !params['city_id'].nil? %>
+      Viewing only charities in: <%= City.find(params['city_id']).name %>
+      <% end %>
+    </h3>
+    <div class="row center">
+      <form action="" method="get" class="center">
+        <div class="form-group">
+          <div class="col-md-6 control-label">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-street-view"></i>
+              </span>
+              <select class="form-control" id="select_gov"></select>
+              <select class="form-control" id="city_id" name='city_id' style="display: none;"></select>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-primary col-md-3" value="Filter"/>
+        </div>
+      </form>
+      <%= javascript_include_tag 'cities_db', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'select_city_logic' %>
+
+    </div>
+    <div class="row">
+
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>email</th>
+          <th>address</th>
+          <th>phone_number</th>
+          <th>description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @charities %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
