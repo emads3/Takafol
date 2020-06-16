@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   get 'donor/cases' , to: 'cases#logged_donor_cases' , as: 'donor_cases'
   get 'donor/pending',to: 'cases#logged_donor_pending_cases' , as: 'donor_pending'
-  get 'charities/', to: 'charities#index', as: 'charities_path'
+  resources :charities
 
 
   resources :cases do

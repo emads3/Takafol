@@ -4,9 +4,14 @@
     <h1 class="center heading-dark">Charities</h1>
     <h3 class="heading-middle-border">
       <% if !params['city_id'].nil? %>
-      Viewing only charities in: <%= City.find(params['city_id']).name %>
+        Viewing only charities in: <%= City.find(params['city_id']).name %>
       <% end %>
     </h3>
+    <% if !notice.nil? %>
+      <p class="alert alert-danger center">
+        <%= notice %>
+      </p>
+    <% end %>
     <div class="row center">
       <form action="" method="get" class="center">
         <div class="form-group">
