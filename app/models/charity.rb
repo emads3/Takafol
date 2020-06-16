@@ -10,6 +10,7 @@ class Charity < ApplicationRecord
 
   has_many :charities_cases
   has_many :cases, through: :charities_cases
+  belongs_to :city
   accepts_nested_attributes_for :cases
 
 end

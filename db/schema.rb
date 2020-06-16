@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_033951) do
+ActiveRecord::Schema.define(version: 2020_06_16_084510) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 2020_06_12_033951) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "city_id", null: false
+    t.index ["city_id"], name: "index_charities_on_city_id"
     t.index ["email"], name: "index_charities_on_email", unique: true
     t.index ["reset_password_token"], name: "index_charities_on_reset_password_token", unique: true
   end
@@ -124,6 +126,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_033951) do
   end
 
   add_foreign_key "cases", "cities"
+  add_foreign_key "charities", "cities"
   add_foreign_key "charities_cases", "cases", on_delete: :cascade
   add_foreign_key "charities_cases", "charities", on_delete: :cascade
   add_foreign_key "cities", "governorates", on_delete: :cascade
