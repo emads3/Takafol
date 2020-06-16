@@ -3,88 +3,93 @@
 <% end %>
 
 <% content_for :content do %>
-  <%=render 'slider'%>
+  <%= render 'slider' %>
 
 
-<div class="home-intro-compact" id="home-introCustom">
-	<div class="container">
+  <div class="home-intro-compact" id="home-introCustom">
+    <div class="container">
 
-    <div class="featured-boxes featured-boxes-style-2 featured-boxes-flat">
-						<div class="row">
-							<div class="col-md-4 col-sm-6">
-								<div class="featured-box featured-box-tertiary featured-box-effect-4">
-									<div class="box-content">
-										<i class="icon-featured fa fa-heart"></i>
-										<h4>Easy</h4>
-										<p>Easy to use so you can donate any where any time.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<div class="featured-box featured-box-tertiary featured-box-effect-4">
-									<div class="box-content">
-										<i class="icon-featured fa fa-check-circle"></i>
-										<h4>Trusted</h4>
-										<p>All Cases and Donors are verified</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6">
-								<div class="featured-box featured-box-tertiary featured-box-effect-4">
-									<div class="box-content">
-										<i class="icon-featured fa fa-hourglass"></i>
-										<h4>Fast</h4>
-										<p>Online payment to make your donation process as fast as possible.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+      <div class="featured-boxes featured-boxes-style-2 featured-boxes-flat">
+        <div class="row">
+          <div class="col-md-4 col-sm-6">
+            <div class="featured-box featured-box-tertiary featured-box-effect-4">
+              <div class="box-content">
+                <i class="icon-featured fa fa-heart"></i>
+                <h4>Easy</h4>
+                <p>Easy to use so you can donate any where any time.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="featured-box featured-box-tertiary featured-box-effect-4">
+              <div class="box-content">
+                <i class="icon-featured fa fa-check-circle"></i>
+                <h4>Trusted</h4>
+                <p>All Cases and Donors are verified</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <div class="featured-box featured-box-tertiary featured-box-effect-4">
+              <div class="box-content">
+                <i class="icon-featured fa fa-hourglass"></i>
+                <h4>Fast</h4>
+                <p>Online payment to make your donation process as fast as possible.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-	</div>
-</div>
+    </div>
+  </div>
 
 <%# <<<<statistics>>>> %>
 
-<section class="section section-default section-default-scale-8">
-	<div class="container">
-		<div class="row">
-			<div class="counters counters-text-light">
-				<div class="col-md-3 col-sm-6">
-					<div class="counter">
-						<strong data-to=<%=CharitiesCase.all.count%> data-append="+">1000+</strong>
-						<label>Verified Cases</label>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="counter">
-						<strong data-to=<%=Charity.all.count%>>5</strong>
-						<label>Registered Charities</label>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="counter">
-						<strong data-to=<%=Donor.all.count%>>352</strong>
-						<label>Registered Donors</label>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="counter">
-						<strong data-to=<%=DonorsCase.all.count%>>178</strong>
-						<label>Adapted Cases</label>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+  <section class="section section-default section-default-scale-8">
+    <div class="container">
+      <div class="row">
+        <div class="counters counters-text-light">
+          <div class="col-md-3 col-sm-6">
+            <div class="counter">
+              <strong data-to=<%= CharitiesCase.all.count %> data-append="+">1000+</strong>
+              <label>Verified Cases</label>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="counter">
+              <strong data-to=<%= Charity.all.count %>>5</strong>
+              <label>Registered Charities</label>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="counter">
+              <strong data-to=<%= Donor.all.count %>>352</strong>
+              <label>Registered Donors</label>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="counter">
+              <strong data-to=<%= DonorsCase.all.count %>>178</strong>
+              <label>Adapted Cases</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
-<div class="container">
-  <div class=row>
-<%= render :partial => "case", :collection => @cases.limit(8), :as => :c %>
+  <div class="container">
+    <div class=row>
+      <%= render :partial => "case", :collection => @cases.limit(8), :as => :c %>
+      <% if @cases.empty? %>
+        <div class="alert alert-warning" role="alert">
+          No cases in the system yet..
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 
 <% end %>
