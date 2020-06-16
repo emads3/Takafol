@@ -1,5 +1,15 @@
-<h1>New Case</h1>
+<% content_for :content do %>
+  <div class="container">
+    <div class='row rounded border-white'>
+      <h2 class="heading-dark center">New Case</h2>
+      <% if !notice.nil? %>
+        <div class="alert alert-success center" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+      <%= render 'form', case: @case %>
+      <%= link_to 'Back', cases_path %>
+    </div>
+  </div>
+<% end %>
 
-<%= render 'form', case: @case %>
-
-<%= link_to 'Back', cases_path %>
