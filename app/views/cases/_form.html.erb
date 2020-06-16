@@ -144,7 +144,7 @@
     <% end %>
 
     <div class="form-group">
-      <label class="col-md-3 control-label">Address</label>
+      <label class="col-md-3 control-label">City</label>
       <div class="col-md-6 control-label">
         <div class="input-group">
           <span class="input-group-addon">
@@ -152,6 +152,18 @@
           </span>
           <select class="form-control" id="select_gov"></select>
           <select class="form-control" id="city_id" name='case[city_id]' style="display: none;"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label">Detailed Address</label>
+      <div class="col-md-6 control-label">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-map-marker"></i>
+          </span>
+          <%= f.text_area :address, class: 'form-control' %>
         </div>
       </div>
     </div>

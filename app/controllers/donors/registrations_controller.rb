@@ -64,12 +64,12 @@ class Donors::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:donor).permit(:email, :password, :national_id)
+    params.require(:donor).permit(:email, :password, :national_id, :phone)
   end
 
   def account_update_params
 
-    params.require(:donor).permit(:email, :password, :national_id)
+    params.require(:donor).permit(:email, :password, :national_id, :phone)
 
   end
 end

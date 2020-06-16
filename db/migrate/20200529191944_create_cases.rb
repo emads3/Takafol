@@ -9,6 +9,7 @@ class CreateCases < ActiveRecord::Migration[6.0]
       t.string :email
       t.integer :priority
       t.string :phone
+      t.string :address
       t.string :national_id, null: false
       t.string :NID_img
       t.decimal :amount_needed , :default => 500

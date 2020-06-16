@@ -11,6 +11,7 @@ class DeviseCreateDonors < ActiveRecord::Migration[6.0]
       t.string :national_id, null: false
       t.string :national_id_img
       t.text :address
+      t.text :phone
 
       ## Recoverable
       t.string   :reset_password_token

@@ -227,11 +227,11 @@ class CasesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def case_params
-    params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :NID_img, :description, :city_id)
+    params.fetch(:case).permit(:name , :job ,:email , :national_id , :phone , :children_num ,:marital_status , :NID_img, :description, :city_id, :address)
   end
 
   #Charity's Special Params to add Case
   def case_params_charity
-    params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed, :city_id)
+    params.fetch(:case).permit(:name , :email , :job , :national_id , :phone ,:children_num, :marital_status, :description, :priority ,:amount_needed, :city_id, :address)
   end
 end
