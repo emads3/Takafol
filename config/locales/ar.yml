@@ -1,5 +1,6 @@
 
 ar:
+  # activerecord doesn't exist in en file
   activerecord:
     models:
       case: 'حالة'
@@ -20,4 +21,30 @@ ar:
   address: "العنوان"
   phone_number: "التليفون"
   phone: "التليفون"
-  description:
+  description: 'تفاصيل'
+  charity:
+    charities: 'الجمعيات الخيرية'
+    filter: 'بحث'
+  layout:
+    get_in_touch: 'اتصل بنا'
+    search: 'بحث'
+    home: 'الصفحة الرئيسية'
+    charities: 'الجمعيات الخيرية'
+    cases: 'الحالات'
+    manage_account: 'ادارة الحساب'
+    welcome: 'مرحبا'
+    sign_in: 'تسجيل دخول'
+    sign_in_charity: 'تسجيل دخول كجمعية خيرية'
+    sign_in_donor: 'تسجيل دخول كمتبرع'
+    sign_up: 'انشاء حساب'
+    sign_up_charity: 'انشاء حساب جمعية خيرية'
+    sign_up_donor: 'انشاء حساب متبرع'
+    logout: 'تسجيل خروج'
+    comming_soon: 'انتظرونا..'
+    copyrights: 'جميع الحقوق محفوظة 2020 ©'
+    contact_us: 'اتصل بنا'
+    address: 'العنوان'
+    alex_address: 'الاسكندرية - 1 شارع محمود سعيد'
+    phone: 'التليفون'
+    email: 'الايميل'
+    follow_us: 'تابعنا'
