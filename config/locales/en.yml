@@ -91,3 +91,24 @@ en:
   h_index:
     sho
 
+    latest_news: 'Latest news'
+
+  charities:
+    charities: 'charities'
+    filter: 'filter'
+
+  auth:
+    login: 'Login'
+    sign_up: 'iign_up'
+    email: 'Email'
+    password: 'Password'
+    remember: 'Remember me?'
+    name: 'Name'
+    phone: 'Phone'
+    description: 'Description'
+    city: 'City'
+    address: 'Address'
+    password_confirm: 'Confirm passowrd'
+    national_id_num: 'national ID Number'
+
+ 
