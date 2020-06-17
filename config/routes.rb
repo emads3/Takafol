@@ -20,7 +20,6 @@ Rails.application.routes.draw do
 
   get 'donor/cases' , to: 'cases#logged_donor_cases' , as: 'donor_cases'
   get 'donor/pending',to: 'cases#logged_donor_pending_cases' , as: 'donor_pending'
-  resources :charities
 
 
   resources :cases do
@@ -34,7 +33,7 @@ Rails.application.routes.draw do
     sessions: 'charities/sessions'
   }
 
-
+  resources :charities, only: [:index, :show]
 
 
   get 'home/index'
