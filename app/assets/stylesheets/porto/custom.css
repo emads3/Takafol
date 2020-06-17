@@ -198,3 +198,8 @@ html body .tabs .nav-tabs a:hover{
     border-right-color: #326b32;
     border-left-color: #326b32;
 }
+
+#logo-text{
+    position: relative;
+    top: 8px;
+}
