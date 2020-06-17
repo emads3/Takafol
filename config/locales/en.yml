@@ -67,3 +67,10 @@ en:
     phone: 'Phone'
     email: 'Email'
     follow_us: 'Follow Us'
+    latest_news: 'Latest news'
+
+  charities:
+    charities: 'charities'
+
+  cases:
+    hard_time: 'We know it is a hard time, but everything is going to be all right.'
