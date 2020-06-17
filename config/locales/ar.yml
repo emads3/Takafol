@@ -1,0 +1,23 @@
+
+ar:
+  activerecord:
+    models:
+      case: 'حالة'
+      charity: 'جمعية خيرية'
+      charities_case: 'الحالات الخاصة بالجمعية الخيرية'
+      city: 'مدينة'
+      governorate: 'محافظة'
+      donor: 'متبرع'
+      donors_case: 'الحالات التي يرعاها المتبرع'
+  hello: "Hello world"
+  # in the form just write <%= form.submit %>
+  helpers:
+    submit:
+      create: 'اضافة %{model}'
+      update: 'اضافة %{model}'
+  name: "الاسم"
+  email: "البريد الالكتروني"
+  address: "العنوان"
+  phone_number: "التليفون"
+  phone: "التليفون"
+  description:

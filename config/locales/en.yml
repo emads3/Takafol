@@ -31,3 +31,13 @@
 
 en:
   hello: "Hello world"
+  helpers:
+    submit:
+      create: 'Create %{model}'
+      update: 'Create %{model}'
+  name: 'Name'
+  email: 'Email'
+  address: 'Address'
+  phone_number: 'Phone'
+  phone: 'phone'
+  description: 'Description'

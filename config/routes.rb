@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
 
   get 'home/index'
+  get 'home/:lang', to: 'home#set_locate'
   root 'home#index'
 
 end
