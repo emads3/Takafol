@@ -3,11 +3,11 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="call-to-action-content">
-									<h3>We know it is a hard time, but everything is going to be all right.</h3>
-									<p>But until it does<strong> we have your back</strong></p>
+									<h3><%= t('cases.hard_times')%></h3>
+									<p><%=t('cases.but')%><strong> <%= t('cases.we')%></strong></p>
 								</div>
 								<div class="call-to-action-btn">
-									<%= link_to "Add Case", new_case_path, :class =>"btn btn-lg btn-success"%><span class="arrow-dark hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="top: -12px;"></span>
+									<%= link_to t('cases.add')  , new_case_path, :class =>"btn btn-lg btn-success"%><span class="arrow-dark hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="top: -12px;"></span>
 								</div>
 							</div>
 						</div>
@@ -22,18 +22,18 @@
 <div class="row">
 <div class="col-md-6">
 
-<h1>All Cases</h1>
+<h1><%= t('cases.cases')%></h1>
 
 </div>
   <div class="col-md-6" style="text-align: end;">
 
     <%= form_with(url: "filtered/:q", method: "get", local: true) do %>
-      <%= label_tag(:q, "Filter by address:") %>
+      <%= label_tag(:q, t('cases.filter')) %>
       <select class="form-control custom-select" id="select_gov"></select>
       <select class="form-control custom-select" id="city_id" name='city_id' style="display: none;"></select>
       <%= javascript_include_tag 'cities_db', 'data-turbolinks-track': 'reload' %>
       <%= javascript_include_tag 'select_city_logic' %>
-      <%= submit_tag("Filter", :class => "btn btn-quaternary mr-xs") %>
+      <%= submit_tag( t('cases.filter_tag'), :class => "btn btn-quaternary mr-xs") %>
     <% end %>
   </div>
 

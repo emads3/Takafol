@@ -67,3 +67,27 @@ en:
     phone: 'Phone'
     email: 'Email'
     follow_us: 'Follow Us'
+  cases:
+    hard_times: 'We know it is a hard time, but everything is going to be all right.'
+    but: 'But until it does' 
+    we: 'we have your back'
+    add: 'Add Case'
+    job: 'job'
+    cases: 'All Cases'
+    filter: 'Filter by address'
+    filter_tag: 'Filter'
+  case:
+    job: 'Job'
+    children: 'Children'
+    donate: 'Donate'
+  show:
+    details: 'Case Details'
+    amount: 'Amount'
+    request: 'Request Case Protection'
+    donate: 'Donate To Case'
+    priority: 'Priority'
+    marital: 'Marital Status'
+    cancel: 'Remove Case Protection'
+  h_index:
+    sho
+

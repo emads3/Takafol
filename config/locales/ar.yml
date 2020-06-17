@@ -48,3 +48,26 @@ ar:
     phone: 'التليفون'
     email: 'الايميل'
     follow_us: 'تابعنا'
+  cases:
+    hard_times: 'نعلم انه وقت عصيب , ولكن كل شي سيكون علي ما يُرام'
+    but: 'و لكن حتي يحدث'
+    we: 'نحن بجانبك'
+    add: 'اضف حاله'
+    cases: 'الحالات'
+    filter: 'ابحث بالعنون'
+    filter_tag: 'ابحث'
+  case:
+    job: 'الوظيفه'
+    children: 'الاطفال'
+    donate: 'تبرع'
+  show:
+    details: 'تفاصيل الحاله'
+    marital: 'الحاله الاجتماعيه'
+    priority: 'الأولويه'
+    donate: 'تبرع للحاله'
+    amount: 'المبلغ'
+    request: 'لرعايه الحاله'
+    cancel: 'للالغاء'
+
+
+
