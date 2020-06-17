@@ -71,6 +71,7 @@ en:
 
   charities:
     charities: 'charities'
+    filter: 'filter'
 
   cases:
     hard_time: 'We know it is a hard time, but everything is going to be all right.'
