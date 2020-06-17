@@ -31,11 +31,9 @@ class CasesController < ApplicationController
   def show
     c = Case.find(params["id"])
     if c.charities_cases.count > 0 || charity_signed_in?
-      logger.info 'yessssssss i entered the if block -==================/\/\/\/\/\/'
       @case = c
     else
-      logger.info 'NOOOO i entered the if block -==================/\/\/\/\/\/'
-      raise ActionController::RoutingError.new('Not Found')
+      redirect_to cases_path, notice: 'Case not found. or you may not have access to it'
     end
   end
 

@@ -8,7 +8,7 @@ document.getElementById('select_gov').appendChild(emptyGov);
 govs.forEach(gov => {
 	let op = document.createElement('option');
 	op.value = gov.id;
-	op.text = gov.name;
+	op.text = gov.name_en;
 	document.getElementById('select_gov').appendChild(op);
 });
 
@@ -23,7 +23,7 @@ document.getElementById('select_gov').addEventListener('change', function () {
 	govCities.forEach(gov => {
 		let singleCity = document.createElement('option');
 		singleCity.value = gov.id;
-		singleCity.text = gov.name;
+		singleCity.text = gov.name_en;
 		selectCityElement.appendChild(singleCity);
 	});
 });
