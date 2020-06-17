@@ -23,18 +23,17 @@
 <h1>All Cases</h1>
 
 </div>
-<div class="col-md-6" style="text-align: end;">
+  <div class="col-md-6" style="text-align: end;">
 
-  <%= form_with(url: "filtered/:q" , method: "get" , local: true )  do %>
-    <%= label_tag(:q, "Filter by address:") %>
-      <select name='city_id' id="addresses" class="custom-select" >
-          <% @cities.each do |city| %>
-            <option value=<%=city.id%>><%= city.name_en %></option>
-          <% end %>
-      </select>
-  <%= submit_tag("Filter",:class => "btn btn-quaternary mr-xs") %>
-  <% end %>
-</div>
+    <%= form_with(url: "filtered/:q", method: "get", local: true) do %>
+      <%= label_tag(:q, "Filter by address:") %>
+      <select class="form-control custom-select" id="select_gov"></select>
+      <select class="form-control custom-select" id="city_id" name='city_id' style="display: none;"></select>
+      <%= javascript_include_tag 'cities_db', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'select_city_logic' %>
+      <%= submit_tag("Filter", :class => "btn btn-quaternary mr-xs") %>
+    <% end %>
+  </div>
 
 </div>
 </div>
