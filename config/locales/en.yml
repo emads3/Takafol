@@ -73,5 +73,19 @@ en:
     charities: 'charities'
     filter: 'filter'
 
+  auth:
+    login: 'Login'
+    sign_up: 'iign_up'
+    email: 'Email'
+    password: 'Password'
+    remember: 'Remember me?'
+    name: 'Name'
+    phone: 'Phone'
+    description: 'Description'
+    city: 'City'
+    address: 'Address'
+    password_confirm: 'Confirm passowrd'
+    national_id_num: 'national ID Number'
+
   cases:
     hard_time: 'We know it is a hard time, but everything is going to be all right.'

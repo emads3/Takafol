@@ -54,5 +54,20 @@ ar:
     charities: 'الجمعيات الخيرية'
     filter: 'بحث'
 
+  auth:
+    login: 'دخول'
+    sign_up: 'تسجيل'
+    email: 'بريد الكتروني'
+    password: 'كلمة السر'
+    remember: 'تذكرني للمرة القادمة'
+    name: 'الاسم'
+    phone: 'التليفون'
+    description: 'التفاصيل'
+    city: 'المدينة - المركز'
+    address: 'العنوان بالتفصيل'
+    password_confirm: 'تأكيد كلمة السر'
+    national_id_num: 'رقم البطاقة الشخصية'
+
+
   cases:
     hard_time: 'نحن نعرف انه وقت صعب علي الجميع. نأمل ان يتحسن كل شيئ في القريب العاجل'
