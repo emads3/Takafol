@@ -188,3 +188,13 @@ html body .tabs .nav-tabs a:hover{
 
 
 }
+
+
+#footer .footer-ribbon {
+    background: #47a447;
+}
+
+#footer .footer-ribbon::before {
+    border-right-color: #326b32;
+    border-left-color: #326b32;
+}

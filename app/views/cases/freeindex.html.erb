@@ -15,7 +15,7 @@
 											<li class="active"><a data-hash data-hash-offset="85" href=<%=free_cases_path%>>Free Cases</a></li>
 										</ul>
 									</li>
-									<li><a data-hash data-hash-offset="85" href="#third">Donation Requests</a></li>
+									<li><a data-hash data-hash-offset="85" href=<%=charity_pending_path%>>Donation Requests</a></li>
 								</ul>
 
 							</aside>
@@ -44,7 +44,11 @@
         <%end%>
     <% end %>
   </tbody>
-</table>>  
+</table> 
+
+<div class="row">
+<%= paginate @cases %>
+</div>
 							
 						</div>
 

@@ -15,7 +15,9 @@ class CasesController < ApplicationController
 
   #Free Cases Index
   def freeindex
-    @cases = Case.all.order(priority: :desc)
+    @charities_cases_set = CharitiesCase.all.map{|c| c.case_id}
+    @cases = Case.where.not(id: @charities_cases_set).order(priority: :desc).page params[:page]
+    # @cases = Case.all.order(priority: :desc).page params[:page]
   end
 
   #Profile
