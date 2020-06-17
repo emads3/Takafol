@@ -7,7 +7,7 @@ class Charity < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-         validates :name , presence: true ,  format: { with: /\A[a-z\s]+\Z/i, message:  "Name must only contain letters." }
+         validates :name , presence: true
          validates :email, email_format: { message: 'Invalid email format' } , confirmation: true
          validates :phone_number, format: { with: /\A[+-]?\d+\z/ , message:  "Phone must only contain Numbers." } , uniqueness: true
 
