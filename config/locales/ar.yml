@@ -69,10 +69,6 @@ ar:
     request: 'لرعايه الحاله'
     cancel: 'للالغاء'
 
-
-
-    latest_news: 'اخر الاخبار'
-
   charities:
     charities: 'الجمعيات الخيرية'
     filter: 'بحث'

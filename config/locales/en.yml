@@ -88,9 +88,6 @@ en:
     priority: 'Priority'
     marital: 'Marital Status'
     cancel: 'Remove Case Protection'
-  h_index:
-    sho
-
     latest_news: 'Latest news'
 
   charities:
