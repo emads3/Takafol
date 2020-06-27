@@ -22,7 +22,7 @@
             <i class="fa fa-group"></i>
           </div>
           <div class="feature-box-info">
-            <h2 class="mb-sm" id="first"><%= current_charity.name ? current_charity.name : "Undefined" %></h2>
+            <h2 class="mb-sm" id="first"><%= @charity.name ? @charity.name : "Undefined" %></h2>
             <div class="divider divider-small">
               <hr>
             </div>
@@ -32,15 +32,15 @@
 
       <dl>
         <dt>About</dt>
-        <dd><%= current_charity.description ? current_charity.description : "Undefined" %></dd>
+        <dd><%= @charity.description ? @charity.description : "Undefined" %></dd>
 
         <dt>Phone number</dt>
-        <dd><%= current_charity.phone_number ? current_charity.phone_number : "Undefined" %></dd>
+        <dd><%= @charity.phone_number ? @charity.phone_number : "Undefined" %></dd>
         <dt>Address</dt>
-        <dd><%= current_charity.address ? current_charity.address : "Undefined" %></dd>
+        <dd><%= @charity.address ? @charity.address : "Undefined" %></dd>
 
         <dt>Email-Address</dt>
-        <dd><%= current_charity.email ? current_charity.email : "Undefined" %></dd>
+        <dd><%= @charity.email ? @charity.email : "Undefined" %></dd>
       </dl>
     </div>
   </div>
