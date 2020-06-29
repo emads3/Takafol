@@ -42,8 +42,8 @@ en:
   phone: 'phone'
   description: 'Description'
   charity:
-    charities: 'الجمعيات الخيرية'
-    filter: 'بحث'
+    charities: 'Charities'
+    filter: 'Filter'
   layout:
     get_in_touch: 'Get in touch!'
     search: 'search'
@@ -59,7 +59,7 @@ en:
     sign_up_charity: 'sign up as charity'
     sign_up_donor: 'sign up as donor'
     logout: 'Log out'
-    comming_soon: 'comming soon..'
+    comming_soon: 'Comming soon..'
     copyrights: '© Copyright 2020. All Rights Reserved.'
     contact_us: 'Contact Us'
     address: 'Address'
@@ -69,7 +69,7 @@ en:
     follow_us: 'Follow Us'
   cases:
     hard_times: 'We know it is a hard time, but everything is going to be all right.'
-    but: 'But until it does' 
+    but: 'But until it does'
     we: 'we have your back'
     add: 'Add Case'
     job: 'job'
@@ -96,7 +96,7 @@ en:
 
   auth:
     login: 'Login'
-    sign_up: 'iign_up'
+    sign_up: 'Sign Up'
     email: 'Email'
     password: 'Password'
     remember: 'Remember me?'
@@ -105,7 +105,7 @@ en:
     description: 'Description'
     city: 'City'
     address: 'Address'
-    password_confirm: 'Confirm passowrd'
+    password_confirm: 'Confirm password'
     national_id_num: 'national ID Number'
 
- 
+
